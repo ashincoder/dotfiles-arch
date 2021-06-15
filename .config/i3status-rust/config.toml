@@ -1,0 +1,73 @@
+theme = "solarized-dark"
+#icons = "awesome"
+
+[[block]]
+block = "focused_window"
+max_width = 50
+show_marks = "visible"
+[block.theme_overrides]
+idle_bg = "#11121D"
+
+[[block]]
+block = "temperature"
+collapsed = false
+interval = 10
+format = "{average}"
+chip = "*-isa-*"
+[block.theme_overrides]
+idle_bg = "#15c4db"
+idle_fg = "#11121D"
+
+[[block]]
+block = "cpu"
+interval = 1
+format = "{barchart} {utilization}"
+[block.theme_overrides]
+idle_bg = "#af2684"
+idle_fg = "#11121D"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{mem_total_used_percents}"
+format_swap = "{swap_used_percents}"
+warning_mem = 80
+warning_swap = 80
+critical_mem = 95
+critical_swap = 95
+[block.theme_overrides]
+idle_bg = "#15c4db"
+idle_fg = "#11121D"
+
+[[block]]
+block = "sound"
+[block.theme_overrides]
+idle_bg = "#af2684"
+idle_fg = "##11121D"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
+[block.theme_overrides]
+idle_bg = "#15c4db"
+idle_fg = "#11121D"
+
+[[block]]
+block = "net"
+device = "wlo1"
+format = "{ssid} {signal_strength} {graph_down;K*}"
+interval = 5
+[block.theme_overrides]
+idle_bg = "#af2684"
+idle_fg = "#11121D"
+[icons.overrides]
+net_wireless = ''
+time = ''
+cpu = ''
+memory_mem = ""
+thermometer = ""
+volume_empty = ""
+volume_full = ""
+volume_half = ""
+volume_muted = ""

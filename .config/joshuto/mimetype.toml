@@ -1,0 +1,19 @@
+[class]
+image_default	= [
+	{ command = "sxiv", fork = true, silent = true },
+	{ command = "sxiv", fork = true, silent = true } ]
+
+[extension]
+# inherit from image_default class
+png.inherit	= "image_default"
+
+# inherit from image_default class
+jpg.inherit	= "image_default"
+# in addition, also add gimp for .jpg files only
+jpg.app_list	= [
+	{ command = "sxiv", fork = true, silent = true } ]
+
+mkv.app_list	= [
+	{ command = "mpv", args = [ "--" ] , fork = true, silent = true },
+rs.app_list	= [
+	{ command = "emacs" },

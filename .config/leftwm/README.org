@@ -1,0 +1,347 @@
+#+TITLE: LeftWM Config
+#+AUTHOR: Ashin Antony
+#+PROPERTY: header-args :tangle config.toml
+
+#+caption: leftwm scrot
+[[https://github.com/ashincoder/dotfiles/blob/master/.screenshots/leftwm.png]]
+
+* TABLE OF CONTENT: :toc:
+- [[#about-config][ABOUT CONFIG]]
+- [[#workspaces][WORKSPACES]]
+- [[#keybindings][KEYBINDINGS]]
+  - [[#applications][Applications]]
+  - [[#scripts][Scripts]]
+  - [[#controlling-keys][Controlling keys]]
+  - [[#volume-and-brightness][Volume and Brightness]]
+  - [[#layouts-and-window-controls][Layouts and Window controls]]
+  - [[#workspace-controls][Workspace controls]]
+
+* ABOUT CONFIG
+LeftWM is a tiling window manager written in Rust that aims to be stable and performant. LeftWM is designed to do one thing and to do that one thing well: be a window manager. LeftWM therefore follows the following mantra:
++ LeftWM is not a compositor.
++ LeftWM is not a lock screen.
++ LeftWM is not a bar. But, there are lots of good bars out there. With themes, picking one is as simple as setting a symlink.
+
+* WORKSPACES
+#+begin_src conf
+modkey = "Mod4"
+workspaces = []
+tags = ["dev", "www", "sys", "doc", "vbox", "chat", "mus", "vid", "gfx"]
+#+end_src
+
+* KEYBINDINGS
+** Applications
+These are my main applications
+#+begin_src conf
+[[keybind]]
+command = "Execute"
+value = "kitty"
+modifier = ["modkey"]
+key = "Return"
+
+[[keybind]]
+command = "Execute"
+value = "pcmanfm"
+modifier = ["modkey"]
+key = "n"
+
+[[keybind]]
+command = "Execute"
+value = "emacsclient -c -a emacs"
+modifier = ["modkey"]
+key = "e"
+
+[[keybind]]
+command = "Execute"
+value = "qutebrowser"
+modifier = ["modkey"]
+key = "w"
+
+[[keybind]]
+command = "Execute"
+value = "dmenu_run"
+modifier = ["modkey"]
+key = "d"
+
+[[keybind]]
+command = "Execute"
+value = "scrot"
+modifier = []
+key = "Print"
+#+end_src
+** Scripts
+These are my dmenu scripts
+#+begin_src conf
+[[keybind]]
+command = "Execute"
+value = ".local/bin/todo"
+modifier = ["modkey", "Shift"]
+key = "o"
+
+[[keybind]]
+command = "Execute"
+value = ".local/bin/dm-wifi"
+modifier = ["modkey", "Shift"]
+key = "w"
+
+[[keybind]]
+command = "Execute"
+value = ".local/bin/dm-record"
+modifier = ["modkey"]
+key = "r"
+
+[[keybind]]
+command = "Execute"
+value = ".local/bin/dm-kill"
+modifier = ["modkey"]
+key = "p"
+
+[[keybind]]
+command = "Execute"
+value = ".local/bin/dm-logout"
+modifier = ["modkey"]
+key = "x"
+
+[[keybind]]
+command = "Execute"
+value = ".local/bin/dm-bookman"
+modifier = ["modkey"]
+key = "b"
+
+[[keybind]]
+command = "Execute"
+value = ".local/bin/dm-confedit"
+modifier = ["modkey"]
+key = "c"
+
+[[keybind]]
+command = "Execute"
+value = ".local/bin/dm-logout"
+modifier = ["modkey"]
+key = "x"
+
+[[keybind]]
+command = "Execute"
+value = ".local/bin/dm-sounds"
+modifier = ["modkey"]
+key = "m"
+#+end_src
+** Controlling keys
+These are the keys that restarts closes and restarts
+#+begin_src conf
+[[keybind]]
+command = "CloseWindow"
+modifier = ["modkey"]
+key = "q"
+
+[[keybind]]
+command = "SoftReload"
+modifier = ["modkey", "Shift"]
+key = "r"
+
+[[keybind]]
+command = "Execute"
+value = "pkill leftwm"
+modifier = ["modkey", "Shift"]
+key = "q"
+#+end_src
+** Volume and Brightness
+These are my volume and brightness keys
+#+begin_src conf
+
+[[keybind]]
+command = "Execute"
+value = "amixer -D pulse sset Master 2%-"
+modifier = []
+key = "XF86XK_AudioLowerVolume"
+
+[[keybind]]
+command = "Execute"
+value = "amixer -D pulse sset Master 2%+"
+modifier = []
+key = "XF86XK_AudioRaiseVolume"
+
+[[keybind]]
+command = "Execute"
+value = "xbacklight -4"
+modifier = []
+key = "XF86XK_MonBrightnessDown"
+
+[[keybind]]
+command = "Execute"
+value = "xbacklight +4"
+modifier = []
+key = "XF86XK_MonBrightnessUp"
+#+end_src
+** Layouts and Window controls
+These keys controls the layouts and windows
+#+begin_src conf
+[[keybind]]
+command = "NextLayout"
+modifier = ["modkey"]
+key = "Tab"
+
+[[keybind]]
+command = "PreviousLayout"
+modifier = ["modkey", "Shift"]
+key = "Tab"
+
+[[keybind]]
+command = "MoveWindowUp"
+modifier = ["modkey", "Shift"]
+key = "k"
+
+[[keybind]]
+command = "MoveWindowDown"
+modifier = ["modkey", "Shift"]
+key = "j"
+
+[[keybind]]
+command = "MoveWindowTop"
+modifier = ["modkey", "Shift"]
+key = "m"
+
+[[keybind]]
+command = "FocusWindowUp"
+modifier = ["modkey"]
+key = "k"
+
+[[keybind]]
+command = "FocusWindowDown"
+modifier = ["modkey"]
+key = "j"
+
+[[keybind]]
+command = "IncreaseMainWidth"
+value = "3"
+modifier = ["modkey"]
+key = "l"
+
+[[keybind]]
+command = "DecreaseMainWidth"
+value = "3"
+modifier = ["modkey"]
+key = "h"
+#+end_src
+** Workspace controls
+These keys control the workspaces
+#+begin_src conf
+
+[[keybind]]
+command = "FocusWorkspaceNext"
+modifier = ["modkey"]
+key = "period"
+
+[[keybind]]
+command = "FocusWorkspacePrevious"
+modifier = ["modkey"]
+key = "comma"
+
+[[keybind]]
+command = "GotoTag"
+value = "1"
+modifier = ["modkey"]
+key = "1"
+
+[[keybind]]
+command = "GotoTag"
+value = "2"
+modifier = ["modkey"]
+key = "2"
+
+[[keybind]]
+command = "GotoTag"
+value = "3"
+modifier = ["modkey"]
+key = "3"
+
+[[keybind]]
+command = "GotoTag"
+value = "4"
+modifier = ["modkey"]
+key = "4"
+
+[[keybind]]
+command = "GotoTag"
+value = "5"
+modifier = ["modkey"]
+key = "5"
+
+[[keybind]]
+command = "GotoTag"
+value = "6"
+modifier = ["modkey"]
+key = "6"
+
+[[keybind]]
+command = "GotoTag"
+value = "7"
+modifier = ["modkey"]
+key = "7"
+
+[[keybind]]
+command = "GotoTag"
+value = "8"
+modifier = ["modkey"]
+key = "8"
+
+[[keybind]]
+command = "GotoTag"
+value = "9"
+modifier = ["modkey"]
+key = "9"
+
+[[keybind]]
+command = "MoveToTag"
+value = "1"
+modifier = ["modkey", "Shift"]
+key = "1"
+
+[[keybind]]
+command = "MoveToTag"
+value = "2"
+modifier = ["modkey", "Shift"]
+key = "2"
+
+[[keybind]]
+command = "MoveToTag"
+value = "3"
+modifier = ["modkey", "Shift"]
+key = "3"
+
+[[keybind]]
+command = "MoveToTag"
+value = "4"
+modifier = ["modkey", "Shift"]
+key = "4"
+
+[[keybind]]
+command = "MoveToTag"
+value = "5"
+modifier = ["modkey", "Shift"]
+key = "5"
+
+[[keybind]]
+command = "MoveToTag"
+value = "6"
+modifier = ["modkey", "Shift"]
+key = "6"
+
+[[keybind]]
+command = "MoveToTag"
+value = "7"
+modifier = ["modkey", "Shift"]
+key = "7"
+
+[[keybind]]
+command = "MoveToTag"
+value = "8"
+modifier = ["modkey", "Shift"]
+key = "8"
+
+[[keybind]]
+command = "MoveToTag"
+value = "9"
+modifier = ["modkey", "Shift"]
+key = "9"
+#+end_src

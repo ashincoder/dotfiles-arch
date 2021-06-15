@@ -1,0 +1,315 @@
+#+TITLE: i3 Config
+#+AUTHOR: Ashin Antony
+#+PROPERTY: header-args :tangle config
+
+#+CAPTION: i3 Scrot
+#+ATTR_HTML: :alt i3 Scrot :title i3 Scrot :align left
+[[https://github.com/ashincoder/dotfiles/blob/master/.screenshots/i3.png]]
+
+* TABLE OF CONTENTS :toc:
+- [[#about-config][ABOUT CONFIG]]
+- [[#settings][SETTINGS]]
+- [[#workpaces-and-rules][WORKPACES AND RULES]]
+- [[#keybindings][KEYBINDINGS]]
+- [[#colors][COLORS]]
+- [[#autostart][AUTOSTART]]
+
+* ABOUT CONFIG
+i3 is a tiling window manager, completely written from scratch. The target platforms are GNU/Linux and BSD operating systems, our code is Free and Open Source Software (FOSS) under the BSD license. i3 is primarily targeted at advanced users and developers.
+i3 website : https://i3wm.org
+
+* SETTINGS
+This where all the settings are defined
+#+begin_src conf
+font pango: JetBrains Mono Nerd Font 10
+
+# set the mod key to the winkey:
+set $mod Mod4
+#set the another mod to the alt key
+set $mod1 Mod1
+
+# default i3 tiling mode:
+workspace_layout default
+
+# i3 stacking layout:
+# Each window will be fullscreen and tabbed top to bottom.
+#workspace_layout stacking
+
+# i3 tabbed layout:
+# Each new window will open fullscreen as a tab (left to right)
+#workspace_layout tabbed
+
+#border indicator on windows:
+new_window pixel 2
+
+# thin borders
+# hide_edge_borders both
+
+# Set inner/outer gaps
+gaps inner 4
+gaps outer 4
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+#+end_src
+
+* WORKPACES AND RULES
+#+begin_src conf
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6:"
+set $ws7 "7:"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws10 "10:"
+
+# use workspaces on different displays:
+# where you have to replace VGA-0/HDMI-0 with the names for your displays
+# you can get from xrandr command
+#workspace $ws1 output VGA-0
+#workspace $ws2 output VGA-0
+#workspace $ws3 output HDMI-0
+#workspace $ws4 output HDMI-0
+#workspace $ws5 output HDMI-0
+
+# bind program to workspace and focus to them on startup:
+assign [class="(?i)kitty"] $ws1
+assign [class="(?i)qutebrowser"] $ws2
+assign [class="(?)Pcmanfm"] $ws3
+#assign [class=""] $ws4
+#assign [class="TelegramDesktop"] $ws6
+
+# automatic set focus new window if it opens on another workspace then the current:
+for_window [class=(?i)kitty] focus
+for_window [class=(?i)qutebrowser] focus
+for_window [class=(?i)Pcmanfm] focus
+#for_window [class=(?i)] focus
+#for_window [class=TelegramDesktop] focus
+
+# set floating (nontiling)for apps needing it
+for_window [class="Yad" instance="yad"] floating enable
+for_window [class="Galculator" instance="galculator"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+
+#set floating (nontiling) for special apps
+for_window [class="Xsane" instance="xsane"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="qt5ct" instance="qt5ct"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Pamac-manager"] floating enable
+#+end_src
+
+* KEYBINDINGS
+This is where keybinding are defined
+#+begin_src conf
+# switch to workspace
+bindsym $mod+1    workspace  $ws1
+bindsym $mod+2    workspace  $ws2
+bindsym $mod+3    workspace  $ws3
+bindsym $mod+4    workspace  $ws4
+bindsym $mod+5    workspace  $ws5
+bindsym $mod+6    workspace  $ws6
+bindsym $mod+7    workspace  $ws7
+bindsym $mod+8    workspace  $ws8
+bindsym $mod+9    workspace  $ws9
+bindsym $mod+0    workspace  $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1    move container to workspace  $ws1
+bindsym $mod+Shift+2    move container to workspace  $ws2
+bindsym $mod+Shift+3    move container to workspace  $ws3
+bindsym $mod+Shift+4    move container to workspace  $ws4
+bindsym $mod+Shift+5    move container to workspace  $ws5
+bindsym $mod+Shift+6    move container to workspace  $ws6
+bindsym $mod+Shift+7    move container to workspace  $ws7
+bindsym $mod+Shift+8    move container to workspace  $ws8
+bindsym $mod+Shift+9    move container to workspace  $ws9
+bindsym $mod+Shift+0    move container to workspace  $ws10
+
+# kill focused window
+bindsym $mod+q kill
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+q exec i3-msg exit
+
+#change the focus of the windows
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# change the position of the windows
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+z split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+g layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# open new empty workspace
+bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace.sh
+
+## Multimedia Keys
+
+# volume# gradular volume control
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
+
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
+# mute
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFUALT_SINK@ toggle
+
+# Backlight control
+bindsym XF86MonBrightnessUp exec xbacklight +3
+bindsym XF86MonBrightnessDown exec xbacklight -3
+# Pulse Audio controls
+
+# gradular volume control
+# bindsym XF86AudioRaiseVolume exec amixer sset Master 1%+ && pkill -RTMIN+1 i3blocks
+# bindsym XF86AudioLowerVolume exec amixer sset Master 1%- && pkill -RTMIN+1 i3blocks
+
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+## App shortcuts
+# start a terminal
+bindsym $mod+Return exec alacritty 
+bindsym $mod+w exec qutebrowser
+bindsym $mod+n exec pcmanfm
+bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
+bindsym $mod+e exec "emacsclient -c -a 'emacs'"
+
+## rofi bindings fancy application menu (binding /$mod+d)
+
+#bindsym $mod+r exec rofi -modi drun -show drun -line-padding 4 \
+#				-columns 2 -padding 50 -hide-scrollbar \
+#				-show-icons -tela-icon-theme "NordArc" -font "FiraCode Nerd Font Regular 12"
+
+bindsym F9 exec rofi -show run
+
+#dmenu run
+bindsym $mod+d exec dmenu_run -c -l 13 -nb '#1e1e1e' -sf '#1e1e1e' -sb '#f4800d' -nf '#F4800d' -bw 2 -fn "NotoSans Bold:pixelsize=12"
+bindsym $mod+p exec .local/bin/dm-kill
+bindsym $mod+r exec .local/bin/dm-record
+bindsym $mod+c exec .local/bin/dm-confedit
+bindsym $mod+m exec .local/bin/dm-sounds
+bindsym $mod+b exec .local/bin/dm-bookman
+bindsym $mod+Shift+w .local/bin/dm-wifi
+bindsym $mod+x exec .local/bin/dm-logout
+bindsym $mod+o exec .local/bin/todo
+#+end_src
+
+* COLORS
+This is where all the color variables are defined
+#+begin_src conf
+set $background #11121D
+set $foreground #A0A8CD
+set $primary  #ffb52a
+set $secondary #e60053
+set $darkbluetrans	#08052be6
+set $darkblue		#08052b
+set $lightblue		#2B60DE
+set $urgentred		#e53935
+set $white		#ffffff
+set $black		#000000
+set $purple		#e345ff
+set $darkgrey		#383c4a
+set $grey		#b0b5bd
+set $mediumgrey		#8b8b8b
+set $yellowbrown	#e1b700
+
+# define colors for windows:
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+############################################
+# bar settings (input comes from i3status-rust) #
+############################################
+bar {
+		font pango:FontAwesome 5 Free Regular 10
+        position top
+		# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+		status_command /usr/bin/i3status-rs ~/.config/i3status-rust/config.toml
+			tray_output primary
+            tray_padding 0
+strip_workspace_numbers yes
+
+
+  colors {
+    background $background
+    statusline $foreground
+    separator  $secondary
+
+    focused_workspace  #44475A #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
+}
+#+end_src
+
+* AUTOSTART
+This is where autostart services are placed
+#+begin_src conf
+#get auth work with polkit-gnome
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+#polybar launch
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Emacs daemon
+exec --no-startup-id /usr/bin/emacs --daemon
+
+# dex execute .desktop files
+# in this cases better disable dex and use manual starting apps using xdg/autostart
+exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
+
+#transparency
+exec --no-startup-id picom
+
+# set wallpaper
+#exec --no-startup-id nitrogen --restore
+exec --no-startup-id xwallpaper --zoom /usr/share/backgrounds/wallpapers/0141.jpg
+
+#set powersavings for display:
+exec --no-startup-id xset dpms 600
+
+# Desktop notifications
+exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
+
+#fix cursor
+exec --no-startup-id xsetroot -cursor_name left_ptr
+#+end_src

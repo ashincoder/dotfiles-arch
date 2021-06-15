@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+
+#set background
+if [ -x "$(command -v xwallpaper)" ]; then
+  xwallpaper --zoom $SCRIPTPATH/down.jpg
+fi
+
+echo "UnloadTheme" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
+
+pkill emacs --daemon 
+pkill picom
+pkill polybar
+pkill /usr/bin/dunst
+
