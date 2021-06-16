@@ -50,14 +50,14 @@ set $ws10 "10:"
 #workspace $ws5 output HDMI-0
 
 # bind program to workspace and focus to them on startup:
-assign [class="(?i)kitty"] $ws1
+assign [class="(?i)alacritty"] $ws1
 assign [class="(?i)qutebrowser"] $ws2
 assign [class="(?)Pcmanfm"] $ws3
 #assign [class=""] $ws4
 #assign [class="TelegramDesktop"] $ws6
 
 # automatic set focus new window if it opens on another workspace then the current:
-for_window [class=(?i)kitty] focus
+for_window [class=(?i)alacritty] focus
 for_window [class=(?i)qutebrowser] focus
 for_window [class=(?i)Pcmanfm] focus
 #for_window [class=(?i)] focus

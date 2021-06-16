@@ -124,7 +124,7 @@ local modkey1      = "Control"
 
 -- personal variables
 --change these variables if you want
-local terminal          = "kitty"
+local terminal          = "alacritty"
 local browser           = "qutebrowser"
 local editor            = "nvim"
 local editorgui         = "emacsclient -c -a 'emacs'"

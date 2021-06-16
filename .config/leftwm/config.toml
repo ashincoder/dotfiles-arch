@@ -1,10 +1,10 @@
 modkey = "Mod4"
 workspaces = []
-tags = ["1","2","3","4","5","6","7","8","9"]
+tags = ["dev", "www", "sys", "doc", "vbox", "chat", "mus", "vid", "gfx"]
 
 [[keybind]]
 command = "Execute"
-value = "kitty"
+value = "alacritty"
 modifier = ["modkey"]
 key = "Return"
 

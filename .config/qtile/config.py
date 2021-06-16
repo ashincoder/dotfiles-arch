@@ -9,7 +9,7 @@ from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
 mod = "mod4"                                     # Sets mod key to SUPER/WINDOWS
-myTerm = "kitty"                             # My terminal of choice
+myTerm = "alacritty"                             # My terminal of choice
 myBrowser = "firefox"                             # My browser
 myEditor = "emacsclient -c -a 'emacs'"
 

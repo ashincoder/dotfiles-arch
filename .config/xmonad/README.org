@@ -84,7 +84,7 @@ This is where the variables are defined
 #+begin_src haskell
 myModMask = mod4Mask :: KeyMask
 
-myTerminal = "kitty" :: String
+myTerminal = "alacritty" :: String
 myBrowser = "firefox" :: String
 myEditor = "emacsclient -c -a 'emacs'" :: String
 
@@ -182,12 +182,12 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
                    , gs_font         = myFont
                    }
 
-myAppGrid = [ ("Neovim", "kitty nvim")
-                 , ("Kitty", "kitty")
+myAppGrid = [ ("Neovim", "alacritty nvim")
+                 , ("Alacritty", "kitty")
                  , ("St", "st")
                  , ("Emacs", "emacsclient -c -a emacs")
                  , ("Firefox", "firefox")
-                 , ("Neovim", "kitty -e nvim")
+                 , ("Neovim", "alacritty -e nvim")
                  , ("PCManFM", "pcmanfm")
                  , ("PavuControl", "pavucontrol")
                  , ("BleachBit", "bleachbit")
@@ -225,7 +225,7 @@ myManageHook = composeAll
      , className =? "pinentry-gtk-2"  --> doFloat
      , className =? "splash"          --> doFloat
      , className =? "toolbar"         --> doFloat
-     , className =? "Kitty"   --> doShift ( myWorkspaces !! 0 )
+     , className =? "Alacritty"   --> doShift ( myWorkspaces !! 0 )
      , className =? "firefox"     --> doShift ( myWorkspaces !! 1 )
      , isFullscreen -->  doFullFloat
      ]
