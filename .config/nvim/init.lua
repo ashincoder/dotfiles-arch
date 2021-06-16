@@ -5,6 +5,8 @@ require "misc-utils"
 -- Commenter
 require('nvim_comment').setup()
 
+-- Bars
+
 require "top-bufferline"
 require "statusline"
 
@@ -18,7 +20,6 @@ require "compe-completion"
 local cmd = vim.cmd
 local g = vim.g
 
-
 g.mapleader = " "
 g.auto_save = 0
 
@@ -29,6 +30,8 @@ require "highlights"
 require "colorscheme"
 
 -- blankline
+
+vim.bo.smartindent = true --smartindent
 
 g.indentLine_enabled = 1
 g.indent_blankline_char = "▏"

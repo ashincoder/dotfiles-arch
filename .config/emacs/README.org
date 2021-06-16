@@ -14,7 +14,6 @@
 - [[#startup-programmes][STARTUP PROGRAMMES]]
   - [[#setting-up-package-repos][Setting up package repos]]
   - [[#disabling-uneeded][Disabling uneeded]]
-  - [[#all-icons][All icons]]
 - [[#gui-tweaks][GUI TWEAKS]]
   - [[#settings][Settings]]
   - [[#displaying-numbers][Displaying Numbers]]
@@ -27,6 +26,7 @@
 - [[#theme][THEME]]
   - [[#colorscheme][Colorscheme]]
   - [[#doom-modeline][Doom Modeline]]
+- [[#all-icons][ALL ICONS]]
 - [[#fonts][FONTS]]
   - [[#setting-font][Setting Font]]
   - [[#zoom-in-and-out][Zoom in and out]]
@@ -177,14 +177,6 @@ This is where all the menubar and shits are disabled
 (use-package no-littering)
 
 #+end_src
-** All icons
-This is required for doom modeline and all.
-#+begin_src emacs-lisp
-
-(use-package all-the-icons)
-
-#+end_src
-
 * GUI TWEAKS
 ** Settings 
 User Interface tweaks
@@ -287,6 +279,20 @@ This is a commenter with evilness
   :hook (after-init . doom-modeline-init))
 #+end_src
 
+* ALL ICONS
+This is required for doom modeline and all.
+#+begin_src emacs-lisp
+
+(use-package all-the-icons)
+
+(defun enable-doom-modeline-icons (_frame)
+  (setq doom-modeline-icon t))
+  
+(add-hook 'after-make-frame-functions 
+          #'enable-doom-modeline-icons)
+
+#+end_src
+
 * FONTS
 Defining our fonts.
 ** Setting Font
@@ -297,13 +303,13 @@ Defining our fonts.
   ((or 'gnu/linux 'windows-nt 'cygwin)
    (set-face-attribute 'default nil
                        :font "JetBrains Mono Nerd Font"
-                       :weight 'light
+                       :weight 'medium
                        :height 110)))
 
 ;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil
                     :font "JetBrains Mono Nerd Font"
-                    :weight 'light
+                    :weight 'medium
                     :height 120) 
 
 ;; Set the variable pitch face
@@ -311,7 +317,7 @@ Defining our fonts.
                     ;; :font "Cantarell"
                     :font "JetBrains Mono Nerd Font"
                     :height 110 
-                    :weight 'light)
+                    :weight 'medium)
 
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.

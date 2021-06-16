@@ -12,8 +12,6 @@ opt("o", "ignorecase", true)
 opt("o", "splitbelow", true)
 opt("o", "splitright", true)
 opt("o", "termguicolors", true)
-opt("w", "number", true)
-opt("o", "numberwidth", 2)
 opt("w", "cul", true)
 
 opt("o", "mouse", "a")
@@ -26,8 +24,14 @@ opt("o", "clipboard", "unnamedplus")
 opt("o", "timeoutlen", 500)
 
 -- for indenline
+opt("b", "smartindent", true)
 opt("b", "expandtab", true)
 opt("b", "shiftwidth", 2)
+
+-- Relative Numbers
+opt("w", "number", true)
+opt("o", "numberwidth", 2)
+opt("w", "relativenumber", true)
 
 local M = {}
 

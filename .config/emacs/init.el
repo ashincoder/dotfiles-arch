@@ -72,8 +72,6 @@
 (setq user-emacs-directory "~/.cache/emacs")
 (use-package no-littering)
 
-(use-package all-the-icons)
-
 (setq inhibit-startup-message t)
 
 (menu-bar-mode -1)          ; Disable the menu bar
@@ -143,18 +141,26 @@
   :demand t
   :hook (after-init . doom-modeline-init))
 
+(use-package all-the-icons)
+
+(defun enable-doom-modeline-icons (_frame)
+  (setq doom-modeline-icon t))
+  
+(add-hook 'after-make-frame-functions 
+          #'enable-doom-modeline-icons)
+
 ;; Set the font face based on platform
 (pcase system-type
   ((or 'gnu/linux 'windows-nt 'cygwin)
    (set-face-attribute 'default nil
                        :font "JetBrains Mono Nerd Font"
-                       :weight 'light
+                       :weight 'medium
                        :height 110)))
 
 ;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil
                     :font "JetBrains Mono Nerd Font"
-                    :weight 'light
+                    :weight 'medium
                     :height 120) 
 
 ;; Set the variable pitch face
@@ -162,7 +168,7 @@
                     ;; :font "Cantarell"
                     :font "JetBrains Mono Nerd Font"
                     :height 110 
-                    :weight 'light)
+                    :weight 'medium)
 
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
