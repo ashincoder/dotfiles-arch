@@ -149,26 +149,14 @@
 (add-hook 'after-make-frame-functions 
           #'enable-doom-modeline-icons)
 
-;; Set the font face based on platform
-(pcase system-type
-  ((or 'gnu/linux 'windows-nt 'cygwin)
-   (set-face-attribute 'default nil
-                       :font "JetBrains Mono Nerd Font"
-                       :weight 'medium
-                       :height 110)))
+(defun ash/set-font-faces ()
+  (set-face-attribute 'default nil :font "JetBrains Mono Nerd Font" :height 110 :weight 'medium)
 
-;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil
-                    :font "JetBrains Mono Nerd Font"
-                    :weight 'medium
-                    :height 120) 
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono Nerd Font" :height 110 :weight 'medium)
 
-;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil
-                    ;; :font "Cantarell"
-                    :font "JetBrains Mono Nerd Font"
-                    :height 110 
-                    :weight 'medium)
+  ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil :font "JetBrains Mono Nerd Font" :height 110 :weight 'regular))
 
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
@@ -181,6 +169,13 @@
 (setq-default line-spacing 0.12)
 ;; changes certain keywords to symbols, such as lamda!
 (setq global-prettify-symbols-mode t)
+
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (ash/set-font-faces))))
+    (ash/set-font-faces))
 
 ;; zoom in/out like we do everywhere else.
 (global-set-key (kbd "C-=") 'text-scale-increase)
