@@ -35,11 +35,11 @@ alias zconf='cd ~/.config/zsh'
 alias record='ffmpeg -f x11grab -i :0.0 -f alsa -i hw:0 out.mkv'
 alias config='/usr/bin/git --git-dir=/home/ashin/dotfiles/ --work-tree=/home/ashin'
 
-# devour alias
+## devour alias
 alias zathura='devour zathura'
 alias sxiv='devour sxiv'
 
-# git alias
+## git alias
 alias addup='git add -u'
 alias addall='git add .'
 alias branch='git branch'
@@ -52,6 +52,9 @@ alias push='git push origin'
 alias stat='git status'  # 'status' is protected name so using 'stat' instead
 alias tag='git tag'
 alias newtag='git tag -a'
+
+## repo aliases
+alias addpack='makepkg -cf ; mv *.pkg.tar.zst ~/Repos/ashin-repo/x86_64 ; cd ~/Repos/ashin-repo/x86_64 ; ./update.sh ; cd .. ; ./gitupdater.sh'
 
 ### Function extract for common file formats ###
 SAVEIFS=$IFS

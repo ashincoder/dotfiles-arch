@@ -258,7 +258,7 @@ This is a commenter with evilness
 #+end_src
 ** Dashboard in emacsclient
 #+begin_src emacs-lisp
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 #+end_src
 
 * THEME
