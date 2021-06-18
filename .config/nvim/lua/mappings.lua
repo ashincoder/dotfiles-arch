@@ -27,10 +27,7 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
 -- toggle numbers ---
 map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt)
 
--- toggle truezen.nvim's ataraxis and minimalist mode
-map("n", "<leader>z", [[ <Cmd> TZAtaraxis<CR>]], opt)
-map("n", "<leader>m", [[ <Cmd> TZMinimalist<CR>]], opt)
-
+-- Ctrl-s saves
 map("n", "<C-s>", [[ <Cmd> w <CR>]], opt)
 -- vim.cmd("inoremap jh <Esc>")
 

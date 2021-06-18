@@ -128,7 +128,7 @@
   (dashboard-modify-heading-icons '((recents . "file-text")
 			      (bookmarks . "book"))))
 
-;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
 (use-package doom-themes
    :demand t
@@ -181,6 +181,12 @@
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 (global-set-key (kbd "C-0") '(lambda () (interactive) (text-scale-adjust 0)))
+
+(use-package rainbow-mode
+  :defer t
+  :hook (org-mode
+         emacs-lisp-mode
+         prog-mode))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -662,3 +668,16 @@
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(rainbow-mode xclip which-key vterm use-package toc-org sudo-edit rainbow-delimiters python-mode projectile org-tree-slide org-present org-bullets no-littering lua-mode ivy-rich ivy-posframe haskell-mode general gcmh forge flycheck evil-tutor evil-nerd-commenter evil-collection doom-themes doom-modeline dired-open dashboard dash-docs counsel company cl-libify all-the-icons-dired)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

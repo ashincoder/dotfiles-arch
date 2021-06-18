@@ -30,7 +30,7 @@
 - [[#fonts][FONTS]]
   - [[#setting-font][Setting Font]]
   - [[#zoom-in-and-out][Zoom in and out]]
-- [[#rainbow-delimeters][RAINBOW DELIMETERS]]
+- [[#rainbow-mode][RAINBOW MODE]]
 - [[#keys][KEYS]]
   - [[#general-keys][General Keys]]
   - [[#keybindings][Keybindings]]
@@ -258,7 +258,7 @@ This is a commenter with evilness
 #+end_src
 ** Dashboard in emacsclient
 #+begin_src emacs-lisp
-;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 #+end_src
 
 * THEME
@@ -337,7 +337,15 @@ Defining our fonts.
 
 #+end_src
 
-* RAINBOW DELIMETERS
+* RAINBOW MODE
+This is a colorizer for emacs.
+#+begin_src emacs-lisp
+(use-package rainbow-mode
+  :defer t
+  :hook (org-mode
+         emacs-lisp-mode
+         prog-mode))
+#+end_src
   This adds rainbow colors to parenthesis
 #+begin_src emacs-lisp
 (use-package rainbow-delimiters
