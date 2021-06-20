@@ -65,14 +65,14 @@ label-separator = " "
 
 label-focused =  %icon%  %name%
 
-label-focused-foreground = #ffffff
-label-focused-background =${colors.active-light}
+
+label-focused-foreground = #11121d
+label-focused-background = #88c0d0
 label-focused-padding = 1
 
 label-occupied = %icon%  %name% 
-label-occupied-foreground = #11121D
-label-occupied-background = #88C0D0
-
+label-occupied-foreground = #ffffff
+label-occupied-background =${colors.active-light}
 label-occupied-padding = 1
 
 label-empty = %icon%
@@ -87,8 +87,8 @@ label-urgent-padding = 1
 
 tray-position = right
 monitor = eDP1
-width =  100%
-height = 18
+width =  180%
+height = 15
 padding-left =1
 padding-right =1
 
@@ -108,7 +108,7 @@ modules-left = bspwm
 modules-center =   
 modules-right =  cpu mem updates pulseaudio wlan time
 
-font-0 = JetBrainsMono Nerd Font:style=Bold:pixelsize=9;2
+font-0 = JetBrainsMono Nerd Font:style=Bold:pixelsize=10;2
 font-1 = Font Awesome 5 Free:style=Regular:size=9;2
 font-2 = Font Awesome 5 Free:fontformat=truetype:size=9:antialias=true;
 

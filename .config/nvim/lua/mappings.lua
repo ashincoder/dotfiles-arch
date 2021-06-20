@@ -54,4 +54,4 @@ map("n", "<leader>/", ":CommentToggle<CR>", {noremap = true, silent = true})
 map("v", "<leader>/", ":CommentToggle<CR>", {noremap = true, silent = true})
 
 -- NvimTree
-map('n', '<leader>e', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
+map('n', '<leader>e', ':NvimTreeToggle<CR>', {noremap = true})

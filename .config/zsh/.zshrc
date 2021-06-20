@@ -20,7 +20,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 zmodload zsh/complist
-compinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump
 _comp_options+=(globdots)		# Include hidden files.
 
 # aliases
@@ -37,6 +37,7 @@ alias config='/usr/bin/git --git-dir=/home/ashin/dotfiles/ --work-tree=/home/ash
 
 ## devour alias
 alias zathura='devour zathura'
+alias mpv='devour mpv'
 alias sxiv='devour sxiv'
 
 ## git alias

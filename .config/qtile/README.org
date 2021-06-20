@@ -90,7 +90,7 @@ keys = [
              desc='Screenshot'
              ),
          Key([mod], "d",
-             lazy.spawn("dmenu_run -c -l 15 -i -nb '#11121D' -nf '#ffffff' -sb '#555a9e' -fn 'NotoSans-10' -bw 4"),
+             lazy.spawn("dmenu_run -nb '#0C1C29' -nf '#c9cde5' -sb '#E2817D' -sf '#11121D'"),
              desc='Launches dmenu'
              ),
              # Laptop keys

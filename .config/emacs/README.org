@@ -171,11 +171,14 @@ The order in which the various Emacs modules load is very important.  So the ver
 ** Disabling uneeded
 This is where all the menubar and shits are disabled
 #+begin_src emacs-lisp
-
 ;; Making emacs clean
 (setq user-emacs-directory "~/.cache/emacs")
 (use-package no-littering)
 
+;; Disabling backup
+(setq make-backup-files nil) ;; We dont need these
+;; Shit cl
+(setq byte-compile-warnings '(cl-functions))
 #+end_src
 * GUI TWEAKS
 ** Settings 
@@ -196,12 +199,18 @@ User Interface tweaks
 #+end_src
 ** Displaying Numbers
 #+begin_src emacs-lisp
+;; Relative line numbers
+(setq-default display-line-numbers 'visual
+              ;; this is the default
+              display-line-numbers-current-absolute t)
 
-(column-number-mode)
+(defun noct:relative ()
+  (setq-local display-line-numbers 'visual))
 
-;; Enable line numbers for programming modes
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(defun noct:absolute ()
+  (setq-local display-line-numbers t))
 
+(add-hook 'evil-insert-state-entry-hook #'noct:absolute)
 #+end_src
 * EVIL MODE
 This where evil things is setup.
@@ -358,8 +367,10 @@ This is where general.el is set.
 #+begin_src emacs-lisp
 (use-package general
   :after evil
+  :init
+  (general-create-definer vim-leader-def :prefix "SPC"))
   :config
-  (general-evil-setup t))
+  (general-evil-setup t)
 #+end_src
 ** Keybindings
 #+begin_src emacs-lisp
@@ -796,7 +807,7 @@ This gives nice syntax-highlighting
 (use-package sh-mode ; built-in
   :ensure nil
   :mode ("\\.\\(?:zunit\\|env\\)\\'" . sh-mode)
-  :mode ("/bspwmrc\\'" . sh-mode)
+  :mode ("/.sh\\'" . sh-mode)
   :config
   (set-docsets 'sh-mode "Bash")
   (set-electric 'sh-mode :words '("else" "elif" "fi" "done" "then" "do" "esac" ";;"))
@@ -846,7 +857,9 @@ This is where company mode and auto pairs are set.
 ** Company
 #+begin_src emacs-lisp
 (use-package company
-  :hook (prog-mode . global-company-mode)
+  :hook
+  (org-mode . company-mode)
+  (prog-mode . company-mode)
   :bind (:map company-active-map ("<tab>" . company-complete-common-or-cycle))
   :custom
   (setq company-idle-delay 0)
@@ -879,6 +892,17 @@ Git client for emacs it uses forge for pushing and pulling.
 ** Forge and Magit
 #+begin_src emacs-lisp
 (use-package magit
+  :general
+  (vim-leader-def 'normal 'global
+    "gj" 'magit-blame
+    "gc" 'magit-commit
+    "gp" 'magit-push
+    "gu" 'magit-pull
+    "gs" 'magit-status
+    "gd" 'magit-diff
+    "gl" 'magit-log
+    "gc" 'magit-checkout
+    "gb" 'magit-branch)
   :commands magit-status)
 
 ;; Forge
@@ -941,4 +965,5 @@ Dial the GC threshold back down so that garbage collection happens more frequent
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 #+end_src
+
 

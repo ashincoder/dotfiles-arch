@@ -72,6 +72,11 @@
 (setq user-emacs-directory "~/.cache/emacs")
 (use-package no-littering)
 
+;; Disabling backup
+(setq make-backup-files nil) ;; We dont need these
+;; Shit cl
+(setq byte-compile-warnings '(cl-functions))
+
 (setq inhibit-startup-message t)
 
 (menu-bar-mode -1)          ; Disable the menu bar
@@ -83,10 +88,18 @@
 ;;By default in Emacs, we don’t have ability to select text, and then start typing and our new text replaces the selection.Let’s fix that!
 (delete-selection-mode t)
 
-(column-number-mode)
+;; Relative line numbers
+(setq-default display-line-numbers 'visual
+              ;; this is the default
+              display-line-numbers-current-absolute t)
 
-;; Enable line numbers for programming modes
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(defun noct:relative ()
+  (setq-local display-line-numbers 'visual))
+
+(defun noct:absolute ()
+  (setq-local display-line-numbers t))
+
+(add-hook 'evil-insert-state-entry-hook #'noct:absolute)
 
 (use-package evil
   :demand t
@@ -193,8 +206,10 @@
 
 (use-package general
   :after evil
+  :init
+  (general-create-definer vim-leader-def :prefix "SPC"))
   :config
-  (general-evil-setup t))
+  (general-evil-setup t)
 
 (nvmap :keymaps 'override :prefix "SPC"
   "c c"   '(compile :which-key "Compile")
@@ -562,7 +577,7 @@
 (use-package sh-mode ; built-in
   :ensure nil
   :mode ("\\.\\(?:zunit\\|env\\)\\'" . sh-mode)
-  :mode ("/bspwmrc\\'" . sh-mode)
+  :mode ("/.sh\\'" . sh-mode)
   :config
   (set-docsets 'sh-mode "Bash")
   (set-electric 'sh-mode :words '("else" "elif" "fi" "done" "then" "do" "esac" ";;"))
@@ -603,7 +618,9 @@
                (evil-define-key 'normal flycheck-mode-map (kbd "[e") 'flycheck-previous-error)))
 
 (use-package company
-  :hook (prog-mode . global-company-mode)
+  :hook
+  (org-mode . company-mode)
+  (prog-mode . company-mode)
   :bind (:map company-active-map ("<tab>" . company-complete-common-or-cycle))
   :custom
   (setq company-idle-delay 0)
@@ -628,6 +645,17 @@
 (show-paren-mode 1)
 
 (use-package magit
+  :general
+  (vim-leader-def 'normal 'global
+    "gj" 'magit-blame
+    "gc" 'magit-commit
+    "gp" 'magit-push
+    "gu" 'magit-pull
+    "gs" 'magit-status
+    "gd" 'magit-diff
+    "gl" 'magit-log
+    "gc" 'magit-checkout
+    "gb" 'magit-branch)
   :commands magit-status)
 
 ;; Forge
@@ -674,7 +702,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(rainbow-mode xclip which-key vterm use-package toc-org sudo-edit rainbow-delimiters python-mode projectile org-tree-slide org-present org-bullets no-littering lua-mode ivy-rich ivy-posframe haskell-mode general gcmh forge flycheck evil-tutor evil-nerd-commenter evil-collection doom-themes doom-modeline dired-open dashboard dash-docs counsel company cl-libify all-the-icons-dired)))
+   '(gcmh vterm which-key forge magit company flycheck python-mode lua-mode haskell-mode ivy-posframe counsel ivy-rich ivy sudo-edit projectile dired-open all-the-icons-dired toc-org org-tree-slide org-present org-bullets general rainbow-delimiters rainbow-mode doom-modeline doom-themes dashboard evil-nerd-commenter evil-tutor evil-collection evil no-littering use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

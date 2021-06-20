@@ -215,7 +215,7 @@ bindsym $mod+e exec "emacsclient -c -a 'emacs'"
 bindsym F9 exec rofi -show run
 
 #dmenu run
-bindsym $mod+d exec dmenu_run -c -l 13 -nb '#1e1e1e' -sf '#1e1e1e' -sb '#f4800d' -nf '#F4800d' -bw 2 -fn "NotoSans Bold:pixelsize=12"
+bindsym $mod+d exec dmenu_run -nb "#070C07" -nf "#eddfc9" -sb "#FBA45C" -sf "#11121D""
 bindsym $mod+p exec .local/bin/dm-kill
 bindsym $mod+r exec .local/bin/dm-record
 bindsym $mod+c exec .local/bin/dm-confedit

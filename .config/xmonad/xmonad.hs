@@ -236,7 +236,7 @@ myKeys =
 
    -------------------- Dmenu and Scripts --------------------
    -- Dmenu Run
-   ("M-d", spawn "dmenu_run"),
+   ("M-d", spawn "dmenu_run -nb '#070E11' -nf '#dfc4cd' -sb '#35638A' -sf '#dfc4cd'"),
    -- Dmenu Conf Editor
    ("M-c", spawn ".local/bin/dm-confedit"),
    -- Dmenu Logout

@@ -3,15 +3,15 @@
 
 # terminal emulator
 super + Return
-    alacritty	
+    alacritty
 
 # dmenu 
 super + d
-   dmenu_run -c -l 13 -nb '#1e1e1e' -sf '#1e1e1e' -sb '#f4800d' -nf '#F4800d' -bw 2 -fn NotoMonoRegular:bold:pixelsize=13 
+    dmenu_run -nb "#0d1115" -nf "#a5cde5" -sb "#555062" -sf "#a5cde5"
 super + c
     .local/bin/dm-confedit
 super + r
-    .local/bin/dm-reocord
+    .local/bin/dm-record
 super + m
     .local/bin/dm-sounds
 super + p
@@ -22,8 +22,8 @@ super + b
     .local/bin/dm-bookman
 super + o
     .local/bin/todo
-super + shift +p
-    passmenu
+super + i 
+    .local/bin/dm-emoji
 
 # make sxhkd reload its configuration files:
 super + Escape
