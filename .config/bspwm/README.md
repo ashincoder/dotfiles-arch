@@ -2,4 +2,4 @@
 
 
 # Image
-[!](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/bspwm.png)
+![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/bspwm.png)
