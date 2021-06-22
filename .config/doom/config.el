@@ -6,7 +6,10 @@
 (map! :leader
       :desc "Org babel tangle" "m B" #'org-babel-tangle)
 
-(setq doom-theme 'doom-one)
+;; Themes
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!

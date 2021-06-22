@@ -12,6 +12,7 @@ export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
 export XMONAD_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/xmonad"
 export XMONAD_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache/}/xmonad"
 export XMONAD_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config/}/xmonad"
+export SUDO_ASKPASS="$HOME/.local/bin/dm-pass"
 
 # Default Apps
 export EDITOR="nvim"
