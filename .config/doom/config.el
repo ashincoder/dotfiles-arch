@@ -29,7 +29,6 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-;; Whether display icons in the mode-line.
 ;; While using the server mode in GUI, should set the value explicitly.
 (setq doom-modeline-icon (display-graphic-p))
 
@@ -46,6 +45,7 @@
 ;; Whether display the modification icon for the buffer.
 ;; It respects `doom-modeline-icon' and `doom-modeline-buffer-state-icon'.
 (setq doom-modeline-buffer-modification-icon t)
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
