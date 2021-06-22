@@ -57,3 +57,5 @@ I love differrent window managers. Their configs are here. Unfortunately I will 
 + Firefox
 + [Qutebrowser](https://github.com/ashincoder/dotfiles/tree/master/.config/qutebrowser)
 
+### For Migration:
+`git clone --bare git@github.com:ashincoder/dotfiles $HOME/dotfiles`

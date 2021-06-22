@@ -41,6 +41,7 @@ idle_fg = "#11121D"
 
 [[block]]
 block = "sound"
+driver = "pulseaudio"
 [block.theme_overrides]
 idle_bg = "#af2684"
 idle_fg = "##11121D"

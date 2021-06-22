@@ -185,7 +185,7 @@ bindsym $mod+e exec "emacsclient -c -a 'emacs'"
 bindsym F9 exec rofi -show run
 
 #dmenu run
-bindsym $mod+d exec dmenu_run -nb "#070C07" -nf "#eddfc9" -sb "#FBA45C" -sf "#11121D""
+bindsym $mod+d exec dmenu_run -nb "#070C07" -nf "#eddfc9" -sb "#FBA45C" -sf "#11121D"
 bindsym $mod+p exec .local/bin/dm-kill
 bindsym $mod+r exec .local/bin/dm-record
 bindsym $mod+c exec .local/bin/dm-confedit

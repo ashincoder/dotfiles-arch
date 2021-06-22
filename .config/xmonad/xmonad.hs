@@ -52,7 +52,7 @@ myNormColor = "#292d3e" :: String
 
 myFocusColor = "#c792ea" :: String
 
-myFont = "xft:FiraCode Nerd Font Mono:regular:size=9:antialias=true:hinting=true" :: String
+myFont = "xft:JetBrains Mono Nerd Font Mono:regular:size=9:antialias=true:hinting=true" :: String
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -151,8 +151,8 @@ myAppGrid = [ ("Neovim", "alacritty nvim")
 myWorkspaces :: [String]
 myWorkspaces = clickable . (map xmobarEscape)
 --                                                                                           
---    $ ["\xf269 ", "\xe61f ", "\xe795 ", "\xf121 ", "\xf419 ", "\xf308 ", "\xf74a ", "\xf7e8 ", "\xf827 "]
-    $ ["dev", "www", "cmd", "ref", "git", "vid", "fs", "gfx", "misc"]
+    -- $ ["\xf269 ", "\xe61f ", "\xe795 ", "\xf121 ", "\xf419 ", "\xf308 ", "\xf74a ", "\xf7e8 ", "\xf827 "]
+    $ ["dev", "www", "cmd", "ref", "git", "vid", "fs", "gfx", "mis"]
   where
     clickable l = ["<action=xdotool key super+" ++ show (i) ++ "> " ++ ws ++ "</action>" | (i, ws) <- zip [1 .. 9] l]
 

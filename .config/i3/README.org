@@ -11,6 +11,9 @@
 - [[#settings][SETTINGS]]
 - [[#workpaces-and-rules][WORKPACES AND RULES]]
 - [[#keybindings][KEYBINDINGS]]
+  - [[#workspace-and-window][Workspace and Window]]
+  - [[#multimedia-keys][Multimedia Keys]]
+  - [[#applications][Applications]]
 - [[#colors][COLORS]]
 - [[#autostart][AUTOSTART]]
 
@@ -104,7 +107,9 @@ for_window [class="Pamac-manager"] floating enable
 #+end_src
 
 * KEYBINDINGS
-This is where keybinding are defined
+This is where keybindings are defined
+** Workspace and Window
+This where the keys control the windows and workspaces
 #+begin_src conf
 # switch to workspace
 bindsym $mod+1    workspace  $ws1
@@ -175,6 +180,9 @@ bindsym $mod+space focus mode_toggle
 # open new empty workspace
 bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace.sh
 
+** Multimedia Keys
+#+begin_src conf 
+
 ## Multimedia Keys
 
 # volume# gradular volume control
@@ -198,6 +206,10 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+#+end_src
+** Applications
+#+begin_src conf
+
 ## App shortcuts
 # start a terminal
 bindsym $mod+Return exec alacritty 
@@ -215,7 +227,7 @@ bindsym $mod+e exec "emacsclient -c -a 'emacs'"
 bindsym F9 exec rofi -show run
 
 #dmenu run
-bindsym $mod+d exec dmenu_run -nb "#070C07" -nf "#eddfc9" -sb "#FBA45C" -sf "#11121D""
+bindsym $mod+d exec dmenu_run -nb "#070C07" -nf "#eddfc9" -sb "#FBA45C" -sf "#11121D"
 bindsym $mod+p exec .local/bin/dm-kill
 bindsym $mod+r exec .local/bin/dm-record
 bindsym $mod+c exec .local/bin/dm-confedit

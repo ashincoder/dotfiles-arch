@@ -201,7 +201,7 @@ myWorkspaces :: [String]
 myWorkspaces = clickable . (map xmobarEscape)
 --                                                                                           
 --    $ ["\xf269 ", "\xe61f ", "\xe795 ", "\xf121 ", "\xf419 ", "\xf308 ", "\xf74a ", "\xf7e8 ", "\xf827 "]
-    $ ["dev", "www", "cmd", "ref", "git", "vid", "fs", "gfx", "misc"]
+    $ ["dev", "www", "cmd", "ref", "git", "vid", "fs", "gfx", "mis"]
   where
     clickable l = ["<action=xdotool key super+" ++ show (i) ++ "> " ++ ws ++ "</action>" | (i, ws) <- zip [1 .. 9] l]
 #+end_src
