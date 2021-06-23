@@ -5,6 +5,18 @@
 
 (map! :leader
       :desc "Org babel tangle" "m B" #'org-babel-tangle)
+(after! org
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  (setq org-directory "~/Org/"
+        org-agenda-files '("~/Org/agenda.org")
+        org-default-notes-file (expand-file-name "notes.org" org-directory)
+        org-ellipsis " ▼ "
+        org-log-done 'time
+        org-journal-dir "~/Org/journal/"
+        org-journal-date-format "%B %d, %Y (%A) "
+        org-journal-file-format "%Y-%m-%d.org"
+        org-hide-emphasis-markers t))
+(use-package ox-man)
 
 ;; Themes
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled

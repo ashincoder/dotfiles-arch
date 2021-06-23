@@ -28,7 +28,7 @@ key = "w"
 
 [[keybind]]
 command = "Execute"
-value = "dmenu_run -nb '#0c0a12' -nf "#9ca3cb" -sb "#674E6B" -sf "#9ca3cb""
+value = "dmenu_run -nb '#0F141F' -nf '#dde1e2' -sb '#565F68' -sf '#dde1e2'"
 modifier = ["modkey"]
 key = "d"
 

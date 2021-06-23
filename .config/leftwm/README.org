@@ -59,7 +59,7 @@ key = "w"
 
 [[keybind]]
 command = "Execute"
-value = "dmenu_run -nb '#0c0a12' -nf "#9ca3cb" -sb "#674E6B" -sf "#9ca3cb""
+value = "dmenu_run -nb '#0c0a12' -nf '#9ca3cb' -sb '#674E6B' -sf '#9ca3cb'"
 modifier = ["modkey"]
 key = "d"
 
