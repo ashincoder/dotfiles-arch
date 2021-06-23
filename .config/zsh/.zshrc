@@ -33,7 +33,7 @@ alias du='dust'
 alias repo='cd ~/Repos/'
 alias zconf='cd ~/.config/zsh'
 alias record='ffmpeg -f x11grab -i :0.0 -f alsa -i hw:0 out.mkv'
-alias config='/usr/bin/git --git-dir=/home/ashin/dotfiles/ --work-tree=/home/ashin'
+alias config='/usr/bin/git --git-dir=/home/ashin/dotfiles-arch/ --work-tree=/home/ashin'
 
 ## devour alias
 alias zathura='devour zathura'

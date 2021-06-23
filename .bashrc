@@ -98,4 +98,4 @@ alias zathura='devour zathura'
 alias sxiv='devour sxiv'
 alias ls='exa -l --icons'
 ## dotfiles bar repository
-alias config='/usr/bin/git --git-dir=/home/ashin/dotfiles/ --work-tree=/home/ashin'
+alias config='/usr/bin/git --git-dir=/home/ashin/dotfiles-arch/ --work-tree=/home/ashin'
