@@ -5,6 +5,14 @@
 super + Return
     alacritty
 
+# Shortcut
+super + w 
+    firefox  
+
+# File manager
+super + n 
+    pcmanfm  
+
 # dmenu 
 super + d
     dmenu_run -nb "#0d1115" -nf "#a5cde5" -sb "#555062" -sf "#a5cde5"
@@ -19,7 +27,7 @@ super + p
 super + x
     .local/bin/dm-logout
 super + b
-    .local/bin/dm-bookman
+    .local/bin/dm-browser
 super + o
     .local/bin/todo
 super + i 
@@ -56,7 +64,7 @@ super + y
 #
 
 # set the window state
-super + {t,shift + t,s,f}
+super + {t,shift + t,f,s}
 	bspc node -t {tiled,pseudo_tiled,floating}
 
 # set the node flags
@@ -148,9 +156,6 @@ XF86AudioLowerVolume
 XF86AudioMute
   amixer -D pulse sset Master toggle-mute
   
-# amixer -q set Master toggle
-# Simple amixer command seems to have problems unmuting device
-
 # Brightness up
 XF86MonBrightnessUp
   xbacklight -inc 5
@@ -162,11 +167,3 @@ XF86MonBrightnessDown
 # Screenshot
 Print
   scrot ~/Screenshot-$(date +%F_%T).png
-# Shortcuts
-super + w 
-    'surf' 
-super + n 
-    pcmanfm  
-
-super + F1
-  ~/.config/bspwm/scripts/keybindings_rofi.sh

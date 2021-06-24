@@ -49,6 +49,7 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
+;; Dashboard ;; 
 ;; While using the server mode in GUI, should set the value explicitly.
 (setq doom-modeline-icon (display-graphic-p))
 
@@ -65,12 +66,6 @@
 ;; Whether display the modification icon for the buffer.
 ;; It respects `doom-modeline-icon' and `doom-modeline-buffer-state-icon'.
 (setq doom-modeline-buffer-modification-icon t)
-
-;; Whether to use unicode as a fallback (instead of ASCII) when not using icons.
-(setq doom-modeline-unicode-fallback nil)
-
-;; Whether display the minor modes in the mode-line.
-(setq doom-modeline-minor-modes nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
