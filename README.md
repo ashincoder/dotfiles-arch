@@ -8,9 +8,7 @@ I am [Ashin Antony](https://www.youtube.com/channel/UCZqKL3vIdyHUiLuR1vYwVgw). D
 
 # Window Managers and Application
 
-I love differrent window managers. Their configs are here. Unfortunately I will not post the images here. The images are in the configs itself.
-
-### Window Managers:
+I love differrent window managers. Their configs are here. The images are below.
 
 + [Xmonad](https://github.com/ashincoder/dotfiles/tree/master/.config/xmonad)
 + [Awesome](https://github.com/ashincoder/dotfiles/tree/master/.config/awesome)
@@ -62,10 +60,17 @@ I love differrent window managers. Their configs are here. Unfortunately I will 
 
 ## Screenshots 
 
+### Bspwm
 ![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/bspwm.png)
+### XMonad
 ![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/xmonad.png)
+### i3
 ![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/i3.png)
+### Dwm
 ![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/dwm.png)
+### Leftwm
 ![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/leftwm.png)
+### Qtile
 ![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/qtile.png)
+### Awesome
 ![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/awesome.png)
