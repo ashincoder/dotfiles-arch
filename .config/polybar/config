@@ -63,14 +63,12 @@ ws-icon-9 = 10;%{F#A3BE8C}
 
 label-separator = " "
 
-label-focused =  %icon%  %name%
-
-
+label-focused =  %name%
 label-focused-foreground = #11121d
 label-focused-background = #88c0d0
 label-focused-padding = 1
 
-label-occupied = %icon%  %name% 
+label-occupied = %name% 
 label-occupied-foreground = #ffffff
 label-occupied-background =${colors.active-light}
 label-occupied-padding = 1

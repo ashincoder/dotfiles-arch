@@ -3,6 +3,11 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;; Evil Commenter
+(map! :leader
+      :desc "Toggle Commenter" "/" #'evilnc-comment-or-uncomment-lines)
+
+;; Org Mode
 (map! :leader
       :desc "Org babel tangle" "m B" #'org-babel-tangle)
 (after! org
@@ -60,6 +65,12 @@
 ;; Whether display the modification icon for the buffer.
 ;; It respects `doom-modeline-icon' and `doom-modeline-buffer-state-icon'.
 (setq doom-modeline-buffer-modification-icon t)
+
+;; Whether to use unicode as a fallback (instead of ASCII) when not using icons.
+(setq doom-modeline-unicode-fallback nil)
+
+;; Whether display the minor modes in the mode-line.
+(setq doom-modeline-minor-modes nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
