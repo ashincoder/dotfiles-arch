@@ -50,6 +50,8 @@
   '(font-lock-keyword-face :slant italic))
 
 ;; Dashboard ;; 
+;; Custom banner
+(setq fancy-splash-image (concat doom-private-dir "splash1.png"))
 ;; While using the server mode in GUI, should set the value explicitly.
 (setq doom-modeline-icon (display-graphic-p))
 
@@ -66,6 +68,21 @@
 ;; Whether display the modification icon for the buffer.
 ;; It respects `doom-modeline-icon' and `doom-modeline-buffer-state-icon'.
 (setq doom-modeline-buffer-modification-icon t)
+
+;; Custom doom-dashboard-footer for me only :))
+(defun doom-dashboard-widget-footer ()
+  (insert
+   "\n"
+   (+doom-dashboard--center
+    (- +doom-dashboard--width 2)
+    (with-temp-buffer
+      (insert-text-button (or (all-the-icons-octicon "octoface" :face 'doom-dashboard-footer-icon :height 1.3 :v-adjust -0.15)
+                              (propertize "github" 'face 'doom-dashboard-footer))
+                          'action (lambda (_) (browse-url "https://github.com/ashincoder"))
+                          'follow-link t
+                          'help-echo "Open Ashincoder Github")
+      (buffer-string)))
+   "\n"))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
