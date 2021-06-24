@@ -59,3 +59,13 @@ I love differrent window managers. Their configs are here. Unfortunately I will 
 
 ### For Migration:
 `git clone --bare git@github.com:ashincoder/dotfiles-arch $HOME/dotfiles-arch`
+
+## Screenshots 
+
+![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/bspwm.png)
+![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/xmonad.png)
+![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/i3.png)
+![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/dwm.png)
+![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/leftwm.png)
+![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/qtile.png)
+![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/awesome.png)
