@@ -13,6 +13,8 @@ export XMONAD_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/xmonad"
 export XMONAD_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache/}/xmonad"
 export XMONAD_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config/}/xmonad"
 export SUDO_ASKPASS="$HOME/.local/bin/dm-pass"
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo 
 
 # Default Apps
 export EDITOR="nvim"
