@@ -58,17 +58,8 @@ end
 
 run_once({ "unclutter -root" }) -- entries must be comma-separated
 
-local themes = {
-    "multicolor",		-- 1
-    "powerarrow",      		-- 2
-    "powerarrow-blue",	 	-- 3
-    "blackburn",		-- 4
-}
-
--- choose your theme here
-local chosen_theme = themes[3]
-
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
+local theme = "powerarrow-blue"
+local theme_path = string.format("%s/.config/awesome/powerarrow-blue/theme.lua", os.getenv("HOME"), theme)
 beautiful.init(theme_path)
 
 -- modkey or mod4 = super key
@@ -86,7 +77,7 @@ local filemanager       = "pcmanfm"
 local mediaplayer       = "mpv"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { " "," "," ", " ", " ", " ", " ", " ", " ", " "  }
+awful.util.tagnames = { "  ","  ","  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "  }
 -- awful.util.tagnames = {  "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒", "➓" }
 --awful.util.tagnames = { " DEV ", " WWW ", " SYS ", " DOC ", " VBOX ", " CHAT ", " MUS ", " VID ", " GFX " }
 
@@ -178,7 +169,7 @@ lain.layout.cascade.tile.extra_padding = dpi(5)
 lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 
-beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+beautiful.init(string.format("%s/.config/awesome/powerarrow-blue/theme.lua", os.getenv("HOME"), theme))
 
 local myawesomemenu = {
     { "hotkeys", function() return false, hotkeys_popup.show_help end },

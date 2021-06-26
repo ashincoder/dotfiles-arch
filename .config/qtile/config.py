@@ -19,7 +19,7 @@ keys = [
              lazy.spawn(myTerm),
              desc='Launches My Terminal'
              ),
-         Key([mod], "Tab",
+         Key([mod], "space",
              lazy.next_layout(),
              desc='Toggle through layouts'
              ),
@@ -115,10 +115,6 @@ keys = [
              lazy.layout.flip(),
              desc='Switch which side main pane occupies (XmonadTall)'
              ),
-          Key([mod], "space",
-             lazy.layout.next(),
-             desc='Switch window focus to other pane(s) of stack'
-             ),
         ### Dmenu Scripts
         Key([mod, "shift"], "w",
              lazy.spawn(".local/bin/dm-wifi"),
@@ -144,10 +140,6 @@ keys = [
              lazy.spawn(".local/bin/dm-logout"),
              desc='A dmenu logout menu'
              ),
-         Key([mod, "shift"], "p",
-             lazy.spawn("passmenu"),
-             desc='A dmenu pass menu'
-             ),
          Key([mod], "b",
              lazy.spawn(".local/bin/dm-bookman"),
              desc='A dmenu browser'
@@ -158,15 +150,15 @@ keys = [
              ),
 ]
 
-group_names = [("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'floating'})]
+group_names = [(" ", {'layout': 'monadtall'}),
+               (" ", {'layout': 'monadtall'}),
+               (" ", {'layout': 'monadtall'}),
+               (" ", {'layout': 'monadtall'}),
+               (" ", {'layout': 'monadtall'}),
+               (" ", {'layout': 'monadtall'}),
+               (" ", {'layout': 'monadtall'}),
+               (" ", {'layout': 'monadtall'}),
+               (" ", {'layout': 'floating'})]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
@@ -176,12 +168,13 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {"border_width": 2,
                 "margin": 8,
-                "border_focus": "e1acff",
+                "border_focus": "4f76c7",
                 "border_normal": "1D2330"
                 }
 
 layouts = [
     #layout.MonadWide(**layout_theme),
+    layout.MonadTall(**layout_theme),
     layout.Bsp(**layout_theme),
     #layout.Stack(stacks=2, **layout_theme),
     #layout.Columns(**layout_theme),
@@ -190,7 +183,6 @@ layouts = [
     #layout.VerticalTile(**layout_theme),
     #layout.Matrix(**layout_theme),
     #layout.Zoomy(**layout_theme),
-    layout.MonadTall(**layout_theme),
     # layout.Max(**layout_theme),
     # layout.Stack(num_stacks=2),
     # layout.RatioTile(**layout_theme),
@@ -230,7 +222,7 @@ colors = [["#11121D", "#000000"], # panel background
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 widget_defaults = dict(
-    font="Ubuntu Mono",
+    font="Font Awesome 5 Free",
     fontsize = 12,
     padding = 2,
     background=colors[2]
@@ -290,7 +282,7 @@ def init_widgets_list():
                        background = colors[0]
                        ),
               widget.WindowName(
-                       font = "FiraCode Nerd Font Bold",
+                       font = "JetBrains Mono Nerd Font Bold",
                        fontsize = 14,
                        foreground = colors[6],
                        background = colors[0],
@@ -313,10 +305,10 @@ def init_widgets_list():
                        background = colors[6],
                        foreground = colors[0],
                        padding = 0,
-                       fontsize = 16
+                       fontsize = 13
                        ),
               widget.CPU(
-                       font = "FiraCode Nerd Font Bold",
+                       font = "JetBrains Mono Nerd Font Bold",
                        background = colors[6],
                        foreground = colors[0],
                        padding = 5,
@@ -335,10 +327,10 @@ def init_widgets_list():
                        background = '58e858',
                        foreground = colors[0],
                        padding = 0,
-                       fontsize = 15
+                       fontsize = 14
                        ),
               widget.ThermalSensor(
-                       font = "FiraCode Nerd Font Bold",
+                       font = "JetBrains Mono Nerd Font Bold",
                        background = '58e858',
                        foreground = colors[0],
                        threshold = 90,
@@ -356,10 +348,10 @@ def init_widgets_list():
                        background = 'd4667f',
                        foreground = colors[0],
                        padding = 2,
-                       fontsize = 19
+                       fontsize = 13
                        ),
               widget.Memory(
-                       font = "FiraCode Nerd Font Bold",
+                       font = "JetBrains Mono Nerd Font Bold",
                        background = 'd4667f',
                        foreground = colors[0],
                        padding = 5
@@ -376,10 +368,10 @@ def init_widgets_list():
                        background = 'e3a724',
                        foreground = colors[0],
                        padding = 0,
-                       fontsize = 13
+                       fontsize = 12
                        ),
               widget.Volume(
-                       font = "FiraCode Nerd Font Bold",
+                       font = "JetBrains Mono Nerd Font Bold",
                        background = 'e3a724',
                        foreground = colors[0],
                        padding = 5
@@ -399,7 +391,7 @@ def init_widgets_list():
                        scale = 0.7
                        ),
               widget.CurrentLayout(
-                       font = "FiraCode Nerd Font Bold",
+                       font = "JetBrains Mono Nerd Font Bold",
                        background = 'a83295',
                        foreground = colors[0],
                        padding = 5
@@ -412,15 +404,15 @@ def init_widgets_list():
                        fontsize = 19
                        ),
               widget.TextBox(
-                       font = "FiraCode Nerd Font Bold",
+                       font = "JetBrains Mono Nerd Font Bold",
                        text = "  ",
                        foreground = colors[0],
                        background = '2ea38e',
                        padding = 0,
-                       # fontsize = 19
+                       fontsize = 15
                        ),
               widget.Clock(
-                       font = "FiraCode Nerd Font Bold",
+                       font = "JetBrains Mono Nerd Font Bold",
                        background = '2ea38e',
                        foreground = colors[0],
                        format = "%A, %B %d - %H:%M "
