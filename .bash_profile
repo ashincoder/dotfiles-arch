@@ -8,6 +8,7 @@
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
+export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
@@ -31,3 +32,7 @@ export VISUAL="emacsclient -c -a emacs"
 export TERMINAL="alacritty"
 export BROWSER="qutebrowser"
 export PAGER="bat"
+
+if [[ "$(tty)" = "/dev/tty1" ]]; then
+	pgrep dwm || startx
+fi
