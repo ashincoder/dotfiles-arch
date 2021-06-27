@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034
+# This issue is ignored because it is part of a larger file that calls upon all variables listed
+
+# To edit this file copy it to `${HOME}/.config/dmscripts/config`
+# `cp /etc/dmscripts/config ${HOME}/.config/dmscripts/config`
+
+# Defined variables, modify anything in quotes to your prefered software
+
+DMENU="dmenu"
+# DMENU="rofi -dmenu"
+
+DMBROWSER="firefox"
+# DMBROWSER="qutebrowser"
+
+DMTERM="alacritty -e"
+
+DMEDITOR="emacsclient -c -a emacs"
+# DMEDITOR="${DMTERM} -e nvim"
+
+# dm-logout
+logout_locker='slock'
+# logout_locker='dm-tool lock'
+
+# dm-bookman 
+bookman_show_source=1
+
+# dm-sounds
+sounds_dir="${HOME}/Music/"
+
+# dm-confedit
+confedit_editor="$DMEDITOR"
+declare -A confedit_list
+confedit_list[confedit]="$HOME/.config/dmscripts/config"
+confedit_list[alacritty]="$HOME/.config/alacritty/alacritty.yml"
+confedit_list[awesome]="$HOME/.config/awesome/rc.lua"
+confedit_list[bash]="$HOME/.bashrc"
+confedit_list[broot]="$HOME/.config/broot/conf.toml"
+confedit_list[bspwm]="$HOME/.config/bspwm/bspwmrc"
+confedit_list[emacs]="$HOME/.config/emacs/README.org"
+confedit_list[doom]="$HOME/.config/doom/config.el"
+confedit_list[dunst]="$HOME/.config/dunst/dunstrc"
+confedit_list[fish]="$HOME/.config/fish/config.fish"
+confedit_list[herbstluftwm]="$HOME/.config/herbstluftwm/autostart"
+confedit_list[i3]="$HOME/.config/i3/config"
+confedit_list[kitty]="$HOME/.config/kitty/kitty.conf"
+confedit_list[neovim]="$HOME/.config/nvim/init.lua"
+confedit_list[picom]="$HOME/.config/picom/picom.conf"
+confedit_list[polybar]="$HOME/.config/polybar/config"
+confedit_list[qtile]="$HOME/.config/qtile/config.py"
+confedit_list[qutebrowser bookmarks]="$HOME/.config/qutebrowser/bookmarks/urls"
+confedit_list[qutebrowser quickmarks]="$HOME/.config/qutebrowser/quickmarks"
+confedit_list[qutebrowser config.py]="$HOME/.config/qutebrowser/config.py"
+confedit_list[spectrwm]="$HOME/.spectrwm.conf"
+confedit_list[ssh]="$HOME/.ssh/config"
+confedit_list[st]="$HOME/.config/st-ashin/config.def.h"
+confedit_list[stumpwm]="$HOME/.config/stumpwm/config"
+confedit_list[surf]="$HOME/Repos/surf-ashin/config.def.h"
+confedit_list[surf]="$HOME/Repos/dwm-ashin/config.def.h"
+confedit_list[surf]="$HOME/Repos/dmenu-ashin/config.def.h"
+confedit_list[sxhkd]="$HOME/.config/sxhkd/sxhkdrc"
+confedit_list[surf]="$HOME/Repos/tabbed-ashin/config.def.h"
+confedit_list[vim]="$HOME/.vimrc"
+confedit_list[xmobar]="$HOME/.config/xmobar/xmobarrc"
+confedit_list[xmonad]="$HOME/.config/xmonad/README.org"
+confedit_list[xinitrc]="$HOME/.xinitrc"
+confedit_list[xresources]="$HOME/.Xresources"
+confedit_list[zsh]="$HOME/.config/zsh/.zshrc"
+
+# Search engine config 
+websearch_browser="$DMBROWSER"
+declare -A websearch
+# Syntax:
+# websearch[name]="https://www.example.com/search?q="
+
+# Search Engines
+websearch[duckduckgo]="https://duckduckgo.com/?q="
+websearch[google]="https://www.google.com/search?q="
+# Information/News
+websearch[wikipedia]="https://en.wikipedia.org/w/index.php?search="
+websearch[wiktionary]="https://en.wiktionary.org/w/index.php?search="
+# Social Media
+websearch[reddit]="https://www.reddit.com/search/?q="
+websearch[youtube]="https://www.youtube.com/results?search_query="
+# Online Shopping
+websearch[amazon]="https://www.amazon.com/s?k="
+# Linux
+websearch[archaur]="https://aur.archlinux.org/packages/?O=0&K="
+websearch[archpkg]="https://archlinux.org/packages/?sort=&q="
+websearch[archwiki]="https://wiki.archlinux.org/index.php?search="
+# Development
+websearch[github]="https://github.com/search?q="
+websearch[gitlab]="https://gitlab.com/search?search="
+# Etc
+
+# dm-youtube config
+youtube_browser="$DMBROWSER"
+# Think of these as your "subscribed channels", name the channel in the square brackets then put the channel URL in the quotation marks
+# Syntax: youtube_channels[name]="https://www.youtube.com/link/to/channel"
+
+declare -A youtube_channels
+youtube_channels[distrotube]="https://www.youtube.com/c/DistroTube/featured"
+youtube_channels[Ashin Antony]="https://www.youtube.com/channel/UCZqKL3vIdyHUiLuR1vYwVgw"
+
+_revision=12
+
