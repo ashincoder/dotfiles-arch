@@ -1,9 +1,4 @@
-;; Using garbage magic hack.
- (use-package gcmh
-   :config
-   (gcmh-mode 1))
-(setq gcmh-idle-delay 5  ; default is 15s
-      gcmh-high-cons-threshold (* 16 1024 1024))  ; 16mb
+;;; init.el --- Description -*- lexical-binding: t; -*-
 
 ;; Setting garbage collection threshold
 (setq gc-cons-threshold 402653184
@@ -38,13 +33,13 @@
 (unless (daemonp)
   (advice-add #'display-startup-echo-area-message :override #'ignore))
 
-;; Reduce *Message* noise at startup. An empty scratch buffer (or the dashboard)
+;; Reduce Message noise at startup. An empty scratch buffer (or the dashboard)
 ;; is more than enough.
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message user-login-name
       inhibit-default-init t
       ;; Shave seconds off startup time by starting the scratch buffer in
-      ;; `fundamental-mode', rather than, say, `org-mode' or `text-mode', which
+      ;; fundamental-mode', rather than, say, org-mode' or `text-mode', which
       ;; pull in a ton of packages. provides a better scratch buffer anyway.
 
       initial-major-mode 'fundamental-mode
@@ -59,14 +54,37 @@
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
-;; Use package
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-(require 'use-package)
-(setq use-package-always-ensure t)
-;; we must prevent Emacs from doing it early!
-(setq package-enable-at-startup nil)
-;; (setq use-package-verbose t)
+
+;; Bootstrap straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Always use straight to install on systems other than Linux
+(setq straight-use-package-by-default (not (eq system-type 'gnu/linux)))
+
+;; Use straight.el for use-package expressions
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+
+;; Load the helper package for commands like `straight-x-clean-unused-repos'
+(require 'straight-x)
+
+;; Using garbage magic hack.
+(use-package gcmh
+  :config
+  (gcmh-mode 1))
+(setq gcmh-idle-delay 5 ; default is 15s
+      gcmh-high-cons-threshold (* 16 1024 1024)) ; 16mb
 
 ;; Making emacs clean
 (setq user-emacs-directory "~/.cache/emacs")
@@ -79,11 +97,11 @@
 
 (setq inhibit-startup-message t)
 
-(menu-bar-mode -1)          ; Disable the menu bar
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)        ; Give some breathing room
+(menu-bar-mode -1) ; Disable the menu bar
+(scroll-bar-mode -1) ; Disable visible scrollbar
+(tool-bar-mode -1) ; Disable the toolbar
+(tooltip-mode -1) ; Disable tooltips
+(set-fringe-mode 10) ; Give some breathing room
 
 ;;By default in Emacs, we don’t have ability to select text, and then start typing and our new text replaces the selection.Let’s fix that!
 (delete-selection-mode t)
@@ -103,7 +121,7 @@
 
 (use-package evil
   :demand t
-  :init      ;; tweak evil's configuration before loading it
+  :init ;; tweak evil's configuration before loading it
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
   (setq evil-vsplit-window-right t)
@@ -124,12 +142,11 @@
 
 (use-package dashboard
   :demand t
-  :init      ;; tweak dashboard config before loading it
+  :init ;; tweak dashboard config before loading it
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
   ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-startup-banner "~/.config/emacs/emacs-dash.png")  ;; use custom image as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
                           (bookmarks . 5)
@@ -139,16 +156,16 @@
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")
-			      (bookmarks . "book"))))
+                                    (bookmarks . "book"))))
 
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+(setq initial-buffer-choice (lambda () (get-buffer "dashboard")))
 
 (use-package doom-themes
-   :demand t
-   :config
-   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-   :init (load-theme 'doom-one t))
+  :demand t
+  :config
+  (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  :init (load-theme 'doom-one t))
 
 (use-package doom-modeline
   :demand t
@@ -158,8 +175,8 @@
 
 (defun enable-doom-modeline-icons (_frame)
   (setq doom-modeline-icon t))
-  
-(add-hook 'after-make-frame-functions 
+
+(add-hook 'after-make-frame-functions
           #'enable-doom-modeline-icons)
 
 (defun ash/set-font-faces ()
@@ -175,9 +192,9 @@
 ;; This is working in emacsclient but not emacs.
 ;; Your font must have an italic face available.
 (set-face-attribute 'font-lock-comment-face nil
-  :slant 'italic)
+                    :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
-  :slant 'italic)
+                    :slant 'italic)
 ;; Uncomment the following line if line spacing needs adjusting.
 (setq-default line-spacing 0.12)
 ;; changes certain keywords to symbols, such as lamda!
@@ -188,7 +205,7 @@
               (lambda (frame)
                 (with-selected-frame frame
                   (ash/set-font-faces))))
-    (ash/set-font-faces))
+  (ash/set-font-faces))
 
 ;; zoom in/out like we do everywhere else.
 (global-set-key (kbd "C-=") 'text-scale-increase)
@@ -208,31 +225,31 @@
   :after evil
   :init
   (general-create-definer vim-leader-def :prefix "SPC"))
-  :config
-  (general-evil-setup t)
+:config
+(general-evil-setup t)
 
 (nvmap :keymaps 'override :prefix "SPC"
-  "c c"   '(compile :which-key "Compile")
-  "c C"   '(recompile :which-key "Recompile")
-  "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
-  "t t"   '(toggle-truncate-lines :which-key "Toggle truncate lines"))
+       "c c" '(compile :which-key "Compile")
+       "c C" '(recompile :which-key "Recompile")
+       "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")
+       "t t" '(toggle-truncate-lines :which-key "Toggle truncate lines"))
 
 (nvmap :keymaps 'override :prefix "SPC"
-  "m *"   '(org-ctrl-c-star :which-key "Org-ctrl-c-star")
-  "m +"   '(org-ctrl-c-minus :which-key "Org-ctrl-c-minus")
-  "m ."   '(counsel-org-goto :which-key "Counsel org goto")
-  "m e"   '(org-export-dispatch :which-key "Org export dispatch")
-  "m f"   '(org-footnote-new :which-key "Org footnote new")
-  "m h"   '(org-toggle-heading :which-key "Org toggle heading")
-  "m i"   '(org-toggle-item :which-key "Org toggle item")
-  "m n"   '(org-store-link :which-key "Org store link")
-  "m o"   '(org-set-property :which-key "Org set property")
-  "m t"   '(org-todo :which-key "Org todo")
-  "m x"   '(org-toggle-checkbox :which-key "Org toggle checkbox")
-  "m B"   '(org-babel-tangle :which-key "Org babel tangle")
-  "m I"   '(org-toggle-inline-images :which-key "Org toggle inline imager")
-  "m T"   '(org-todo-list :which-key "Org todo list")
-  "m a"   '(org-agenda :which-key "Org agenda"))
+       "m *" '(org-ctrl-c-star :which-key "Org-ctrl-c-star")
+       "m +" '(org-ctrl-c-minus :which-key "Org-ctrl-c-minus")
+       "m ." '(counsel-org-goto :which-key "Counsel org goto")
+       "m e" '(org-export-dispatch :which-key "Org export dispatch")
+       "m f" '(org-footnote-new :which-key "Org footnote new")
+       "m h" '(org-toggle-heading :which-key "Org toggle heading")
+       "m i" '(org-toggle-item :which-key "Org toggle item")
+       "m n" '(org-store-link :which-key "Org store link")
+       "m o" '(org-set-property :which-key "Org set property")
+       "m t" '(org-todo :which-key "Org todo")
+       "m x" '(org-toggle-checkbox :which-key "Org toggle checkbox")
+       "m B" '(org-babel-tangle :which-key "Org babel tangle")
+       "m I" '(org-toggle-inline-images :which-key "Org toggle inline imager")
+       "m T" '(org-todo-list :which-key "Org todo list")
+       "m a" '(org-agenda :which-key "Org agenda"))
 
 (setq-default tab-width 4)
 (setq-default evil-shift-width tab-width)
@@ -242,43 +259,43 @@
 (winner-mode 1)
 (nvmap :prefix "SPC"
        ;; Window splits
-       "w c"   '(evil-window-delete :which-key "Close window")
-       "w n"   '(evil-window-new :which-key "New window")
-       "w s"   '(evil-window-split :which-key "Horizontal split window")
-       "w v"   '(evil-window-vsplit :which-key "Vertical split window")
+       "w c" '(evil-window-delete :which-key "Close window")
+       "w n" '(evil-window-new :which-key "New window")
+       "w s" '(evil-window-split :which-key "Horizontal split window")
+       "w v" '(evil-window-vsplit :which-key "Vertical split window")
        ;; Window motions
-       "w h"   '(evil-window-left :which-key "Window left")
-       "w j"   '(evil-window-down :which-key "Window down")
-       "w k"   '(evil-window-up :which-key "Window up")
-       "w l"   '(evil-window-right :which-key "Window right")
-       "w w"   '(evil-window-next :which-key "Goto next window")
+       "w h" '(evil-window-left :which-key "Window left")
+       "w j" '(evil-window-down :which-key "Window down")
+       "w k" '(evil-window-up :which-key "Window up")
+       "w l" '(evil-window-right :which-key "Window right")
+       "w w" '(evil-window-next :which-key "Goto next window")
        ;; winner mode
-       "w <left>"  '(winner-undo :which-key "Winner undo")
-       "w <right>" '(winner-redo :which-key "Winner redo"))
+       "w " '(winner-undo :which-key "Winner undo")
+       "w " '(winner-redo :which-key "Winner redo"))
 
 (nvmap :prefix "SPC"
-       "b b"   '(ibuffer :which-key "Ibuffer")
-       "b c"   '(clone-indirect-buffer-other-window :which-key "Clone indirect buffer other window")
-       "b k"   '(kill-current-buffer :which-key "Kill current buffer")
-       "b n"   '(next-buffer :which-key "Next buffer")
-       "b p"   '(previous-buffer :which-key "Previous buffer")
-       "b B"   '(ibuffer-list-buffers :which-key "Ibuffer list buffers")
-       "b K"   '(kill-buffer :which-key "Kill buffer"))
+       "b b" '(ibuffer :which-key "Ibuffer")
+       "b c" '(clone-indirect-buffer-other-window :which-key "Clone indirect buffer other window")
+       "b k" '(kill-current-buffer :which-key "Kill current buffer")
+       "b n" '(next-buffer :which-key "Next buffer")
+       "b p" '(previous-buffer :which-key "Previous buffer")
+       "b B" '(ibuffer-list-buffers :which-key "Ibuffer list buffers")
+       "b K" '(kill-buffer :which-key "Kill buffer"))
 
 (nvmap :prefix "SPC"
-       "o m"   '(bookmark-set :which-key "Set Bookmark")
-       "o M"   '(bookmark-set-no-overwrite :which-key "Set Bookmark No Overwrite")
-       "o l"   '(bookmark-bmenu-list :which-key "List Bookmarks")
-       "o j"   '(bookmark-jump :which-key "Jump to Bookmarks")
-       "o r"   '(bookmark-rename :which-key "Rename Bookmarks")
-       "o d"   '(bookmark-delete :which-key "Delete a Bookmark"))
+       "o m" '(bookmark-set :which-key "Set Bookmark")
+       "o M" '(bookmark-set-no-overwrite :which-key "Set Bookmark No Overwrite")
+       "o l" '(bookmark-bmenu-list :which-key "List Bookmarks")
+       "o j" '(bookmark-jump :which-key "Jump to Bookmarks")
+       "o r" '(bookmark-rename :which-key "Rename Bookmarks")
+       "o d" '(bookmark-delete :which-key "Delete a Bookmark"))
 
 (nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
-       "e b"   '(eval-buffer :which-key "Eval elisp in buffer")
-       "e d"   '(eval-defun :which-key "Eval defun")
-       "e e"   '(eval-expression :which-key "Eval elisp expression")
-       "e l"   '(eval-last-sexp :which-key "Eval last sexression")
-       "e r"   '(eval-region :which-key "Eval region"))
+       "e b" '(eval-buffer :which-key "Eval elisp in buffer")
+       "e d" '(eval-defun :which-key "Eval defun")
+       "e e" '(eval-expression :which-key "Eval elisp expression")
+       "e l" '(eval-last-sexp :which-key "Eval last sexression")
+       "e r" '(eval-region :which-key "Eval region"))
 
 (defun ash/org-mode-setup ()
   (org-indent-mode)
@@ -289,43 +306,43 @@
   :hook (org-mode . ash/org-mode-setup)
   :commands (org-agenda)
   :config
-  (setq org-directory "~/Org/"
-      org-agenda-files '("~/Org/agenda.org") org-default-notes-file (expand-file-name "notes.org" org-directory) org-ellipsis " ▼ "
-      org-log-done 'time
-      org-journal-dir "~/Org/journal/"
-      org-journal-date-format "%B %d, %Y (%A) "
-      org-journal-file-format "%Y-%m-%d.org"
-      org-hide-emphasis-markers t
-      org-src-preserve-indentation nil
-      org-src-tab-acts-natively t
-      org-edit-src-content-indentation 0))
+  (setq org-directory "/Org/"
+        org-agenda-files '("/Org/agenda.org") org-default-notes-file (expand-file-name "notes.org" org-directory) org-ellipsis " ▼ "
+        org-log-done 'time
+        org-journal-dir "~/Org/journal/"
+        org-journal-date-format "%B %d, %Y (%A) "
+        org-journal-file-format "%Y-%m-%d.org"
+        org-hide-emphasis-markers t
+        org-src-preserve-indentation nil
+        org-src-tab-acts-natively t
+        org-edit-src-content-indentation 0))
 
 (use-package org-bullets
   :after org
   :hook (org-mode . org-bullets-mode))
 ;; Replace list hyphen with dot
- (font-lock-add-keywords 'org-mode
-                         '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+(font-lock-add-keywords 'org-mode
+                        '(("^ *\([-]\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 (setq org-todo-keywords
       '((sequence
-         "TODO(t)"  ; A task that needs doing & is ready to do
-         "PROJ(p)"  ; A project, which usually contains other tasks
-         "LOOP(r)"  ; A recurring task
-         "STRT(s)"  ; A task that is in progress
-         "WAIT(w)"  ; Something external is holding up this task
-         "HOLD(h)"  ; This task is paused/on hold because of me
-         "IDEA(i)"  ; An unconfirmed and unapproved task or notion
+         "TODO(t)" ; A task that needs doing & is ready to do
+         "PROJ(p)" ; A project, which usually contains other tasks
+         "LOOP(r)" ; A recurring task
+         "STRT(s)" ; A task that is in progress
+         "WAIT(w)" ; Something external is holding up this task
+         "HOLD(h)" ; This task is paused/on hold because of me
+         "IDEA(i)" ; An unconfirmed and unapproved task or notion
          "|"
-         "DONE(d)"  ; Task successfully completed
+         "DONE(d)" ; Task successfully completed
          "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
         (sequence
-         "[ ](T)"   ; A task that needs doing
-         "[-](S)"   ; Task is in progress
-         "[?](W)"   ; Task is being held up or paused
+         " " ; A task that needs doing
+         "-" ; Task is in progress
+         "?" ; Task is being held up or paused
          "|"
-         "[X](D)")))  ; Task was completed
+         "X"))) ; Task was completed
 
 (setq org-blank-before-new-entry (quote ((heading . nil)
                                          (plain-list-item . nil))))
@@ -336,8 +353,8 @@
   (setq org-indirect-buffer-display 'current-window
         org-eldoc-breadcrumb-separator " → "
         org-entities-user
-        '(("flat"  "\\flat" nil "" "" "266D" "♭")
-          ("sharp" "\\sharp" nil "" "" "266F" "♯"))
+        '(("flat" "\flat" nil "" "" "266D" "♭")
+          ("sharp" "\sharp" nil "" "" "266F" "♯"))
         org-fontify-done-headline t
         org-fontify-quote-and-verse-blocks t
         org-hide-leading-stars t
@@ -427,9 +444,9 @@
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 (setq org-src-fontify-natively t
-    org-src-tab-acts-natively t
-    org-confirm-babel-evaluate nil
-    org-edit-src-content-indentation 0)
+      org-src-tab-acts-natively t
+      org-confirm-babel-evaluate nil
+      org-edit-src-content-indentation 0)
 
 (use-package toc-org
   :commands toc-org-enable
@@ -439,18 +456,18 @@
 (use-package all-the-icons-dired)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
-  (nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
-    "d d" '(dired :which-key "Open dired")
-    "d j" '(dired-jump :which-key "Dired jump to current")
-    "d p" '(peep-dired :which-key "Peep-dired"))
+(nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
+       "d d" '(dired :which-key "Open dired")
+       "d j" '(dired-jump :which-key "Dired jump to current")
+       "d p" '(peep-dired :which-key "Peep-dired"))
 
-  (with-eval-after-load 'dired
-    ;;(define-key dired-mode-map (kbd "M-p") 'peep-dired)
-    (evil-define-key 'normal dired-mode-map (kbd "h") 'dired-up-directory)
-    (evil-define-key 'normal dired-mode-map (kbd "l") 'dired-open-file)) ; use dired-find-file instead if not using dired-open package
+(with-eval-after-load 'dired
+  ;;(define-key dired-mode-map (kbd "M-p") 'peep-dired)
+  (evil-define-key 'normal dired-mode-map (kbd "h") 'dired-up-directory)
+  (evil-define-key 'normal dired-mode-map (kbd "l") 'dired-open-file)) ; use dired-find-file instead if not using dired-open package
 
-  ;; With dired-open plugin, you can launch external programs for certain extensions
-  ;; For example, I set all .png files to open in 'sxiv' and all .mp4 files to open in 'mpv'
+;; With dired-open plugin, you can launch external programs for certain extensions
+;; For example, I set all .png files to open in 'sxiv' and all .mp4 files to open in 'mpv'
 (use-package dired-open
   :after dired
   :config
@@ -468,17 +485,17 @@
   :config (projectile-mode))
 
 (nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
-       "."     '(find-file :which-key "Find file")
-       "f f"   '(find-file :which-key "Find file")
-       "f r"   '(counsel-recentf :which-key "Recent files")
-       "f s"   '(save-buffer :which-key "Save file")
-       "f u"   '(sudo-edit-find-file :which-key "Sudo find file")
-       "f y"   '(ash/show-and-copy-buffer-path :which-key "Yank file path")
-       "f C"   '(copy-file :which-key "Copy file")
-       "f D"   '(delete-file :which-key "Delete file")
-       "f R"   '(rename-file :which-key "Rename file")
-       "f S"   '(write-file :which-key "Save file as...")
-       "f U"   '(sudo-edit :which-key "Sudo edit file"))
+       "." '(find-file :which-key "Find file")
+       "f f" '(find-file :which-key "Find file")
+       "f r" '(counsel-recentf :which-key "Recent files")
+       "f s" '(save-buffer :which-key "Save file")
+       "f u" '(sudo-edit-find-file :which-key "Sudo find file")
+       "f y" '(ash/show-and-copy-buffer-path :which-key "Yank file path")
+       "f C" '(copy-file :which-key "Copy file")
+       "f D" '(delete-file :which-key "Delete file")
+       "f R" '(rename-file :which-key "Rename file")
+       "f S" '(write-file :which-key "Save file as...")
+       "f U" '(sudo-edit :which-key "Sudo edit file"))
 
 (use-package recentf
   :config
@@ -520,8 +537,8 @@
   :after ivy
   :custom
   (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
+                          ivy-rich-switch-buffer-align-virtual-buffer t
+                          ivy-rich-path-style 'abbrev)
   :config
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer)
@@ -542,30 +559,30 @@
   :after ivy
   :init
   (setq ivy-posframe-display-functions-alist
-    '((swiper                     . ivy-posframe-display-at-point)
-      (complete-symbol            . ivy-posframe-display-at-point)
-      (counsel-M-x                . ivy-display-function-fallback)
-      (counsel-esh-history        . ivy-posframe-display-at-window-center)
-      (counsel-describe-function  . ivy-display-function-fallback)
-      (counsel-describe-variable  . ivy-display-function-fallback)
-      (counsel-find-file          . ivy-display-function-fallback)
-      (counsel-recentf            . ivy-display-function-fallback)
-      (counsel-register           . ivy-posframe-display-at-frame-bottom-window-center)
-      (dmenu                      . ivy-posframe-display-at-frame-top-center)
-      (nil                        . ivy-posframe-display))
-    ivy-posframe-height-alist
-    '((swiper . 20)
-      (dmenu . 20)
-      (t . 10)))
+        '((swiper . ivy-posframe-display-at-point)
+          (complete-symbol . ivy-posframe-display-at-point)
+          (counsel-M-x . ivy-display-function-fallback)
+          (counsel-esh-history . ivy-posframe-display-at-window-center)
+          (counsel-describe-function . ivy-display-function-fallback)
+          (counsel-describe-variable . ivy-display-function-fallback)
+          (counsel-find-file . ivy-display-function-fallback)
+          (counsel-recentf . ivy-display-function-fallback)
+          (counsel-register . ivy-posframe-display-at-frame-bottom-window-center)
+          (dmenu . ivy-posframe-display-at-frame-top-center)
+          (nil . ivy-posframe-display))
+        ivy-posframe-height-alist
+        '((swiper . 20)
+          (dmenu . 20)
+          (t . 10)))
   :config
   (ivy-posframe-mode 1)) ; 1 enables posframe-mode, 0 disables it.
 
 (use-package haskell-mode
-  :mode "\\.hs\\'")
+  :mode "\.hs\'")
 (use-package lua-mode
-  :mode "\\.lua\\'")
+  :mode "\.lua\'")
 (use-package python-mode
-  :mode "\\.py\\'")
+  :mode "\.py\'")
 (setq python-shell-interpreter "/usr/bin/python3")
 
 ;;; SH mode:
@@ -582,87 +599,86 @@
 ;;; Packages
 
 (use-package sh-mode ; built-in
-  :ensure nil
-  :mode ("\\.\\(?:zunit\\|env\\)\\'" . sh-mode)
-  :mode ("/.sh\\'" . sh-mode)
+  :straight nil
+  :mode ("\.\(?:zunit\|env\)\'" . sh-mode)
+  :mode ("/.sh\'" . sh-mode)
   :config
   (set-docsets 'sh-mode "Bash")
   (set-electric 'sh-mode :words '("else" "elif" "fi" "done" "then" "do" "esac" ";;"))
   (set-formatter 'shfmt
-    '("shfmt" "-ci"
-      ("-i" "%d" (unless indent-tabs-mode tab-width))
-      ("-ln" "%s" (pcase sh-shell (`bash "bash") (`mksh "mksh") (_ "posix")))))
+                 '("shfmt" "-ci"
+                   ("-i" "%d" (unless indent-tabs-mode tab-width))
+                   ("-ln" "%s" (pcase sh-shell (bash "bash") (mksh "mksh") (_ "posix")))))
   (set-repl-handler 'sh-mode #'+sh/open-repl)
   (set-lookup-handlers 'sh-mode :documentation #'+sh-lookup-documentation-handler)
   (set-ligatures 'sh-mode
-    ;; Functional
-    :def "function"
-    ;; Types
-    :true "true" :false "false"
-    ;; Flow
-    :not "!"
-    :and "&&" :or "||"
-    :in "in"
-    :for "for"
-    :return "return"
-    ;; Other
-    :dot "." :dot "source"))
+                 ;; Functional
+                 :def "function"
+                 ;; Types
+                 :true "true" :false "false"
+                 ;; Flow
+                 :not "!"
+                 :and "&&" :or "||"
+                 :in "in"
+                 :for "for"
+                 :return "return"
+                 ;; Other
+                 :dot "." :dot "source"))
 
 ;;; Emacs Lisp mode:
- (add-hook 'emacs-lisp-mode-hook
-           (lambda ()
-             (eldoc-mode)
-             (define-key emacs-lisp-mode-map (kbd "<C-return>") 'eval-last-sexp)))
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (eldoc-mode)
+            (define-key emacs-lisp-mode-map (kbd "") 'eval-last-sexp)))
 
 (setq-default enable-local-variables :safe)
 
 (use-package flycheck
-     :commands flycheck-mode)
+  :commands flycheck-mode)
 ;; hook
-   (add-hook 'flycheck-mode-hook
-             (lambda ()
-               (evil-define-key 'normal flycheck-mode-map (kbd "]e") 'flycheck-next-error)
-               (evil-define-key 'normal flycheck-mode-map (kbd "[e") 'flycheck-previous-error)))
+(add-hook 'flycheck-mode-hook
+          (lambda ()
+            (evil-define-key 'normal flycheck-mode-map (kbd "]e") 'flycheck-next-error)
+            (evil-define-key 'normal flycheck-mode-map (kbd "[e") 'flycheck-previous-error)))
 
 (use-package company
   :hook
   (org-mode . company-mode)
   (prog-mode . company-mode)
-  :bind (:map company-active-map ("<tab>" . company-complete-common-or-cycle))
+  :bind (:map company-active-map ("" . company-complete-common-or-cycle))
   :custom
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
- (with-eval-after-load 'company
-;;   (define-key company-active-map [tab] 'company-complete-common-or-cycle)
-   (define-key company-active-map (kbd "SPC") #'company-abort))
+(with-eval-after-load 'company
+  ;; (define-key company-active-map [tab] 'company-complete-common-or-cycle)
+  (define-key company-active-map (kbd "SPC") #'company-abort))
 
 (setq skeleton-pair t)
 (global-set-key "[" 'skeleton-pair-insert-maybe)
 (global-set-key "{" 'skeleton-pair-insert-maybe)
 (global-set-key "(" 'skeleton-pair-insert-maybe)
-(global-set-key "\"" 'skeleton-pair-insert-maybe)
 (global-set-key "'" 'skeleton-pair-insert-maybe)
 
 (setq show-paren-delay 0.1
-       show-paren-highlight-openparen t
-       show-paren-when-point-inside-paren t
-       show-paren-when-point-in-periphery t)
+      show-paren-highlight-openparen t
+      show-paren-when-point-inside-paren t
+      show-paren-when-point-in-periphery t)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 
 (use-package magit
   :general
   (vim-leader-def 'normal 'global
-    "gj" 'magit-blame
-    "gc" 'magit-commit
-    "gp" 'magit-push
-    "gu" 'magit-pull
-    "gs" 'magit-status
-    "gd" 'magit-diff
-    "gl" 'magit-log
-    "gc" 'magit-checkout
-    "gb" 'magit-branch)
+                  "gj" 'magit-blame
+                  "gc" 'magit-commit
+                  "gp" 'magit-push
+                  "gu" 'magit-pull
+                  "gs" 'magit-status
+                  "gd" 'magit-diff
+                  "gl" 'magit-log
+                  "gc" 'magit-checkout
+                  "gb" 'magit-branch)
   :commands magit-status)
 
 ;; Forge
@@ -678,16 +694,16 @@
         which-key-add-column-padding 1))
 
 (nvmap :prefix "SPC"
-       "r c"   '(copy-to-register :which-key "Copy to register")
-       "r f"   '(frameset-to-register :which-key "Frameset to register")
-       "r i"   '(insert-register :which-key "Insert register")
-       "r j"   '(jump-to-register :which-key "Jump to register")
-       "r l"   '(list-registers :which-key "List registers")
-       "r n"   '(number-to-register :which-key "Number to register")
-       "r r"   '(counsel-register :which-key "Choose a register")
-       "r v"   '(view-register :which-key "View a register")
-       "r w"   '(window-configuration-to-register :which-key "Window configuration to register")
-       "r +"   '(increment-register :which-key "Increment register")
+       "r c" '(copy-to-register :which-key "Copy to register")
+       "r f" '(frameset-to-register :which-key "Frameset to register")
+       "r i" '(insert-register :which-key "Insert register")
+       "r j" '(jump-to-register :which-key "Jump to register")
+       "r l" '(list-registers :which-key "List registers")
+       "r n" '(number-to-register :which-key "Number to register")
+       "r r" '(counsel-register :which-key "Choose a register")
+       "r v" '(view-register :which-key "View a register")
+       "r w" '(window-configuration-to-register :which-key "Window configuration to register")
+       "r +" '(increment-register :which-key "Increment register")
        "r SPC" '(point-to-register :which-key "Point to register"))
 
 (setq scroll-conservatively 101) ;; value greater than 100 gets rid of half page jumping
