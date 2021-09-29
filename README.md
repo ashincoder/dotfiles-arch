@@ -30,30 +30,30 @@ I love differrent window managers. Their configs are here. The images are below.
 + [Dmenu](https://github.com/ashincoder/dmenu-ashin)
 
 ### Application:
-+ [Joshuto](https://github.com/ashincoder/dotfiles/tree/master/.config/joshuto)
-+ [Picom](https://github.com/ashincoder/dotfiles/tree/master/.config/picom)
-+ [Dmscripts](https://github.com/ashincoder/dotfiles/tree/master/.config/dmscripts)
++ [Joshuto](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/joshuto)
++ [Picom](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/picom)
++ [Dmscripts](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/dmscripts)
 
 ### Shell:
 
-+ [Zsh](https://github.com/ashincoder/dotfiles/tree/master/.config/zsh)  (My default)
-+ [Starship](https://github.com/ashincoder/dotfiles/tree/master/.config/starship.toml)  (My shell-prompt)
-+ [Fish](https://github.com/ashincoder/dotfiles/tree/master/.config/fish) (I used for a month)
++ [Zsh](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/zsh)  (My default)
++ [Starship](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/starship.toml)  (My shell-prompt)
++ [Fish](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/fish) (I used for a month)
 
 ### Editors:
 
-+ [Emacs](https://github.com/ashincoder/dotfiles/tree/master/.config/emacs) (Made by me)
-+ [Neovim](https://github.com/ashincoder/dotfiles/tree/master/.config/nvim) (Fork from NvChad and my own plugins with commenter and colorscheme)
++ [Emacs](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/emacs) (Made by me)
++ [Neovim](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/nvim) (Fork from NvChad and my own plugins with commenter and colorscheme)
 
 ### Panels
 
-+ [Polybar](https://github.com/ashincoder/dotfiles/tree/master/.config/polybar)
-+ [Xmobar](https://github.com/ashincoder/dotfiles/tree/master/.config/xmobar)
++ [Polybar](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/polybar)
++ [Xmobar](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/xmobar)
 
 ### Browser:
 
 + Firefox
-+ [Qutebrowser](https://github.com/ashincoder/dotfiles/tree/master/.config/qutebrowser)
++ [Qutebrowser](https://github.com/ashincoder/dotfiles-arch/tree/master/.config/qutebrowser)
 
 ### For Migration:
 `git clone --bare git@github.com:ashincoder/dotfiles-arch $HOME/dotfiles-arch`
@@ -61,16 +61,16 @@ I love differrent window managers. Their configs are here. The images are below.
 ## Screenshots 
 
 ### Bspwm
-![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/bspwm.png)
+![](https://github.com/ashincoder/dotfiles-arch/blob/master/.screenshots/bspwm.png)
 ### XMonad
-![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/xmonad.png)
+![](https://github.com/ashincoder/dotfile-archs/blob/master/.screenshots/xmonad.png)
 ### i3
-![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/i3.png)
+![](https://github.com/ashincoder/dotfiles-arch/blob/master/.screenshots/i3.png)
 ### Dwm
-![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/dwm.png)
+![](https://github.com/ashincoder/dotfiles-arch/blob/master/.screenshots/dwm.png)
 ### Leftwm
-![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/leftwm.png)
+![](https://github.com/ashincoder/dotfiles-arch/blob/master/.screenshots/leftwm.png)
 ### Qtile
-![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/qtile.png)
+![](https://github.com/ashincoder/dotfiles-arch/blob/master/.screenshots/qtile.png)
 ### Awesome
-![](https://github.com/ashincoder/dotfiles/blob/master/.screenshots/awesome.png)
+![](https://github.com/ashincoder/dotfiles-arch/blob/master/.screenshots/awesome.png)
