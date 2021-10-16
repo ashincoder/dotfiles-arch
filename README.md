@@ -63,7 +63,7 @@ I love differrent window managers. Their configs are here. The images are below.
 ### Bspwm
 ![](https://github.com/ashincoder/dotfiles-arch/blob/master/.screenshots/bspwm.png)
 ### XMonad
-![](https://github.com/ashincoder/dotfile-archs/blob/master/.screenshots/xmonad.png)
+![](https://github.com/ashincoder/dotfiles-arch/blob/master/.screenshots/xmonad.png)
 ### i3
 ![](https://github.com/ashincoder/dotfiles-arch/blob/master/.screenshots/i3.png)
 ### Dwm
